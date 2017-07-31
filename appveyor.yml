@@ -3,9 +3,8 @@ branches:
   only:
     - master
 image: Visual Studio 2017
-nuget:
-  account_feed: true
-  project_feed: true
+before_install:
+  - nuget sources add -name core -source https://ci.appveyor.com/nuget/core-q3ibse3iub8l
 install:
   - nuget restore
 configuration: Debug
