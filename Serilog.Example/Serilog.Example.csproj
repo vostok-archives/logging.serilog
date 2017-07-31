@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net46</TargetFramework>
     <OutputType>Exe</OutputType>
-    <AssemblyName>Vostok.Logging.Serilog.Example</AssemblyName>
+    <AssemblyName>Vostok.Serilog.Example</AssemblyName>
     <Authors>Vostok team</Authors>
     <Company>SKB Kontur</Company>
     <Product>Vostok</Product>
@@ -15,11 +15,11 @@
   <ItemGroup>
     <PackageReference Include="Serilog" Version="2.5.0" />
     <PackageReference Include="Serilog.Sinks.Console" version="3.0.1" />
-    <PackageReference Include="Vostok.Core" Version="1.0.0" />
+    <PackageReference Include="Vostok.Core" Version="1.0.0-alpha1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Logging.Serilog\Logging.Serilog.csproj" />
+    <ProjectReference Include="..\Serilog\Serilog.csproj" />
   </ItemGroup>
 
 </Project>
