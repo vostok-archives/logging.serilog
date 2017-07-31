@@ -15,4 +15,4 @@ before_build:
       $propertyGroup.Version = $env:appveyor_build_version
       $xml.Save($xmlPath)
 after_build:
-  - ps: Get-ChildItem .\Serilog\bin\Debug\Vostok.Logging.Serilog.*.nupkg | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
+  - ps: Get-ChildItem .\Serilog\bin\Debug\Vostok.Serilog.*.nupkg | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
