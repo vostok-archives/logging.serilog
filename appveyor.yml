@@ -4,7 +4,7 @@ branches:
     - master
 image: Visual Studio 2017
 install:
-  - nuget sources add -name core -source https://ci.appveyor.com/nuget/core-4bxdhgsi37wg
+  - nuget sources add -name core -source https://ci.appveyor.com/nuget/core-2nbdf5dfgymf
   - nuget restore
 configuration: Debug
 before_build:
@@ -13,8 +13,10 @@ before_build:
       Update-AppveyorBuild -Version "1.0.0-pre$zeroPaddedBuildNumber"
       $xmlPath = "$env:appveyor_build_folder\Serilog\Serilog.csproj"
       $xml = [xml](get-content $xmlPath)
-      $propertyGroup = $xml.Project.PropertyGroup | Where { $_.Version}
-      $propertyGroup.Version = $env:appveyor_build_version
+      $version = $xml.CreateElement("Version")
+      $versionText = $xml.CreateTextNode($env:appveyor_build_version)
+      $version.AppendChild($versionText)
+      $xml.Project.PropertyGroup.AppendChild($version)
       $xml.Save($xmlPath)
 after_build:
   - ps: Get-ChildItem .\Serilog\bin\Debug\Vostok.Serilog.*.nupkg | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
