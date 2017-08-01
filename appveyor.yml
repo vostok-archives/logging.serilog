@@ -4,7 +4,7 @@ branches:
     - master
 image: Visual Studio 2017
 install:
-  - nuget sources add -name core -source https://ci.appveyor.com/nuget/core-q3ibse3iub8l
+  - nuget sources add -name core -source https://ci.appveyor.com/nuget/core-4bxdhgsi37wg
   - nuget restore
 configuration: Debug
 before_build:
