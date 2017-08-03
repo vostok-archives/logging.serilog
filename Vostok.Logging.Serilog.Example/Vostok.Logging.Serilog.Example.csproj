@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net46</TargetFramework>
     <OutputType>Exe</OutputType>
-    <AssemblyName>Vostok.Serilog.Example</AssemblyName>
+    <AssemblyName>Vostok.Logging.Serilog.Example</AssemblyName>
     <Authors>Vostok team</Authors>
     <Company>SKB Kontur</Company>
     <Product>Vostok</Product>

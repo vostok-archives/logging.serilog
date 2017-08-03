@@ -19,4 +19,7 @@ before_build:
       $xml.Project.PropertyGroup.AppendChild($version)
       $xml.Save($xmlPath)
 after_build:
-  - ps: Get-ChildItem .\Serilog\bin\Debug\Vostok.Serilog.*.nupkg | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
+  - ps: Get-ChildItem .\Vostok.Logging.Serilog\bin\Debug\Vostok.Logging.Serilog.*.nupkg | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
+  - ps: Get-ChildItem .\Vostok.Logging.Log4Net\bin\Debug\Vostok.Logging.Log4Net.*.nupkg | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
+  - ps: Get-ChildItem .\Vostok.Instrumentation.WebApi\bin\Debug\Vostok.Instrumentation.WebApi.*.nupkg | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
+  - ps: Get-ChildItem .\Vostok.Instrumentation.Topshelf\bin\Debug\Vostok.Instrumentation.Topshelf.*.nupkg | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }

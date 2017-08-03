@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net46</TargetFramework>
     <OutputType>Exe</OutputType>
-    <AssemblyName>Vostok.Log4Net.Example</AssemblyName>
+    <AssemblyName>Vostok.Logging.Log4Net.Example</AssemblyName>
     <Authors>Vostok team</Authors>
     <Company>SKB Kontur</Company>
     <Product>Vostok</Product>

@@ -2,16 +2,16 @@
 
   <PropertyGroup>
     <TargetFramework>net46</TargetFramework>
-    <AssemblyName>Vostok.Logging.Log4Net</AssemblyName>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <AssemblyName>Vostok.Instrumentation.Topshelf</AssemblyName>
+    <RootNamespace>Vostok.Instrumentation.Topshelf</RootNamespace>
     <Authors>Vostok team</Authors>
     <Company>SKB Kontur</Company>
     <Product>Vostok</Product>
-    <RootNamespace>Vostok.Logging.Log4Net</RootNamespace>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="log4net" Version="2.0.8" />
+    <PackageReference Include="Topshelf" Version="4.0.3" />
     <PackageReference Include="Vostok.Core" Version="1.0.0-pre000001" />
   </ItemGroup>
 
