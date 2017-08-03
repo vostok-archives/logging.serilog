@@ -11,7 +11,37 @@ before_build:
   - ps: |
       $zeroPaddedBuildNumber = [convert]::ToInt32($env:appveyor_build_number, 10).ToString("000000")
       Update-AppveyorBuild -Version "1.0.0-pre$zeroPaddedBuildNumber"
-      $xmlPath = "$env:appveyor_build_folder\Serilog\Serilog.csproj"
+      $xmlPath = "$env:appveyor_build_folder\Vostok.Logging.Serilog\Vostok.Logging.Serilog.csproj"
+      $xml = [xml](get-content $xmlPath)
+      $version = $xml.CreateElement("Version")
+      $versionText = $xml.CreateTextNode($env:appveyor_build_version)
+      $version.AppendChild($versionText)
+      $xml.Project.PropertyGroup.AppendChild($version)
+      $xml.Save($xmlPath)
+  - ps: |
+      $zeroPaddedBuildNumber = [convert]::ToInt32($env:appveyor_build_number, 10).ToString("000000")
+      Update-AppveyorBuild -Version "1.0.0-pre$zeroPaddedBuildNumber"
+      $xmlPath = "$env:appveyor_build_folder\Vostok.Logging.Log4Net\Vostok.Logging.Log4Net.csproj"
+      $xml = [xml](get-content $xmlPath)
+      $version = $xml.CreateElement("Version")
+      $versionText = $xml.CreateTextNode($env:appveyor_build_version)
+      $version.AppendChild($versionText)
+      $xml.Project.PropertyGroup.AppendChild($version)
+      $xml.Save($xmlPath)
+  - ps: |
+      $zeroPaddedBuildNumber = [convert]::ToInt32($env:appveyor_build_number, 10).ToString("000000")
+      Update-AppveyorBuild -Version "1.0.0-pre$zeroPaddedBuildNumber"
+      $xmlPath = "$env:appveyor_build_folder\Vostok.Instrumentation.WebApi\Vostok.Instrumentation.WebApi.csproj"
+      $xml = [xml](get-content $xmlPath)
+      $version = $xml.CreateElement("Version")
+      $versionText = $xml.CreateTextNode($env:appveyor_build_version)
+      $version.AppendChild($versionText)
+      $xml.Project.PropertyGroup.AppendChild($version)
+      $xml.Save($xmlPath)
+  - ps: |
+      $zeroPaddedBuildNumber = [convert]::ToInt32($env:appveyor_build_number, 10).ToString("000000")
+      Update-AppveyorBuild -Version "1.0.0-pre$zeroPaddedBuildNumber"
+      $xmlPath = "$env:appveyor_build_folder\Vostok.Instrumentation.Topshelf\Vostok.Instrumentation.Topshelf.csproj"
       $xml = [xml](get-content $xmlPath)
       $version = $xml.CreateElement("Version")
       $versionText = $xml.CreateTextNode($env:appveyor_build_version)
