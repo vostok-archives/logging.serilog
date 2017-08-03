@@ -3,23 +3,22 @@
   <PropertyGroup>
     <TargetFramework>net46</TargetFramework>
     <OutputType>Exe</OutputType>
-    <AssemblyName>Vostok.Serilog.Example</AssemblyName>
+    <AssemblyName>Vostok.Log4Net.Example</AssemblyName>
     <Authors>Vostok team</Authors>
     <Company>SKB Kontur</Company>
     <Product>Vostok</Product>
-    <RootNamespace>Vostok.Logging.Serilog.Example</RootNamespace>
+    <RootNamespace>Vostok.Logging.Log4Net.Example</RootNamespace>
     <ApplicationIcon />
     <StartupObject />
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Serilog" Version="2.5.0" />
-    <PackageReference Include="Serilog.Sinks.Console" version="3.0.1" />
     <PackageReference Include="Vostok.Core" Version="1.0.0-pre000001" />
+    <PackageReference Include="log4net" Version="2.0.8" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Serilog\Serilog.csproj" />
+    <ProjectReference Include="..\Vostok.Logging.Log4Net\Vostok.Logging.Log4Net.csproj" />
   </ItemGroup>
 
 </Project>
