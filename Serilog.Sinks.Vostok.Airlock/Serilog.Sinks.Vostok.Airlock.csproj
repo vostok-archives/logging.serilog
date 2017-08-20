@@ -1,13 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
-    <AssemblyName>Vostok.Logging.Serilog</AssemblyName>
-    <Authors>Vostok team</Authors>
-    <Company>SKB Kontur</Company>
-    <Product>Vostok</Product>
-    <RootNamespace>Vostok.Logging.Serilog</RootNamespace>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <RootNamespace>Serilog</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

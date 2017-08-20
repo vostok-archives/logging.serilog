@@ -40,8 +40,7 @@ namespace Vostok.Logging.Serilog
             var bindedProperties = new List<LogEventProperty>(properties.Count);
             foreach (var property in properties)
             {
-                LogEventProperty bindedProperty;
-                if (logger.BindProperty(property.Key, property.Value, false, out bindedProperty))
+                if (logger.BindProperty(property.Key, property.Value, false, out var bindedProperty))
                     bindedProperties.Add(bindedProperty);
             }
             return bindedProperties;
@@ -49,9 +48,7 @@ namespace Vostok.Logging.Serilog
 
         private Template BindTemplate(string messageTemplate, object[] parameters)
         {
-            MessageTemplate bindedMessageTemplate;
-            IEnumerable<LogEventProperty> bindedParameters;
-            return logger.BindMessageTemplate(messageTemplate, parameters, out bindedMessageTemplate, out bindedParameters)
+            return logger.BindMessageTemplate(messageTemplate, parameters, out var bindedMessageTemplate, out var bindedParameters)
                 ? new Template(bindedMessageTemplate, bindedParameters)
                 : Template.Empty;
         }
