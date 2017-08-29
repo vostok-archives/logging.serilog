@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net46</TargetFramework>
+    <TargetFramework>net461</TargetFramework>
     <OutputType>Exe</OutputType>
     <AssemblyName>Vostok.Logging.Serilog.Example</AssemblyName>
     <Authors>Vostok team</Authors>
@@ -15,7 +15,7 @@
   <ItemGroup>
     <PackageReference Include="Serilog" Version="2.5.0" />
     <PackageReference Include="Serilog.Sinks.Console" version="3.0.1" />
-    <PackageReference Include="Vostok.Core" Version="1.0.0-pre000001" />
+    <PackageReference Include="Vostok.Core" Version="1.0.0-pre000028" />
   </ItemGroup>
 
   <ItemGroup>

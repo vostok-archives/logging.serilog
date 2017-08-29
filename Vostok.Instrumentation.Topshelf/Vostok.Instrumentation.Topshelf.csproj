@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net46</TargetFramework>
+    <TargetFramework>net461</TargetFramework>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <AssemblyName>Vostok.Instrumentation.Topshelf</AssemblyName>
     <RootNamespace>Vostok.Instrumentation.Topshelf</RootNamespace>
@@ -12,7 +12,7 @@
 
   <ItemGroup>
     <PackageReference Include="Topshelf" Version="4.0.3" />
-    <PackageReference Include="Vostok.Core" Version="1.0.0-pre000001" />
+    <PackageReference Include="Vostok.Core" Version="1.0.0-pre000028" />
   </ItemGroup>
 
 </Project>

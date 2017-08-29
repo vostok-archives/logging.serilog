@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net46</TargetFramework>
+    <TargetFramework>net461</TargetFramework>
     <OutputType>Exe</OutputType>
     <AssemblyName>Vostok.Logging.Log4Net.Example</AssemblyName>
     <Authors>Vostok team</Authors>
@@ -13,7 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Vostok.Core" Version="1.0.0-pre000001" />
+    <PackageReference Include="Vostok.Core" Version="1.0.0-pre000028" />
     <PackageReference Include="log4net" Version="2.0.8" />
   </ItemGroup>
 
