@@ -15,7 +15,6 @@
   <ItemGroup>
     <PackageReference Include="Serilog" Version="2.5.0" />
     <PackageReference Include="Serilog.Sinks.Console" version="3.0.1" />
-    <PackageReference Include="Vostok.Core" Version="1.0.0-pre000028" />
   </ItemGroup>
 
   <ItemGroup>

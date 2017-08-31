@@ -12,7 +12,7 @@
 
   <ItemGroup>
     <PackageReference Include="Topshelf" Version="4.0.3" />
-    <PackageReference Include="Vostok.Core" Version="1.0.0-pre000028" />
+    <PackageReference Include="Vostok.Core" Version="1.0.0-pre000029" />
   </ItemGroup>
 
 </Project>
