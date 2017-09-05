@@ -7,7 +7,8 @@ namespace Vostok.Instrumentation.AspNetCore
     {
         public static IApplicationBuilder UseVostok(this IApplicationBuilder builder, ILog log)
         {
-            builder.UseMiddleware<VostokAspNetCoreMiddleware>(new VostokAspNetCoreOptions { Log = log });
+            var middleware = new VostokAspNetCoreMiddleware(log);
+            builder.Use(middleware.InvokeAsync);
             return builder;
         }
     }
