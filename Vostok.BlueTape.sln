@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.16
+VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vostok.Logging.Serilog", "Vostok.Logging.Serilog\Vostok.Logging.Serilog.csproj", "{9DAA8DF7-9AC1-4DD3-BD24-C92A8269AC58}"
 EndProject
@@ -14,6 +14,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vostok.Instrumentation.Topshelf", "Vostok.Instrumentation.Topshelf\Vostok.Instrumentation.Topshelf.csproj", "{A76C009C-E489-46E3-A25C-019B4D13A2A5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vostok.Instrumentation.WebApi", "Vostok.Instrumentation.WebApi\Vostok.Instrumentation.WebApi.csproj", "{5B8E1507-BD51-48EB-8DE8-81023C00E42D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vostok.Instrumentation.AspNetCore", "Vostok.Instrumentation.AspNetCore\Vostok.Instrumentation.AspNetCore.csproj", "{8085968E-B15A-40E6-BEC4-796737CDFEE4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,8 +47,15 @@ Global
 		{5B8E1507-BD51-48EB-8DE8-81023C00E42D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B8E1507-BD51-48EB-8DE8-81023C00E42D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B8E1507-BD51-48EB-8DE8-81023C00E42D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8085968E-B15A-40E6-BEC4-796737CDFEE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8085968E-B15A-40E6-BEC4-796737CDFEE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8085968E-B15A-40E6-BEC4-796737CDFEE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8085968E-B15A-40E6-BEC4-796737CDFEE4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0FD2A3D4-B0AF-4FAE-8B84-B4BCFD9CBDF5}
 	EndGlobalSection
 EndGlobal
