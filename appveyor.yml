@@ -48,8 +48,19 @@ before_build:
       $version.AppendChild($versionText)
       $xml.Project.PropertyGroup.AppendChild($version)
       $xml.Save($xmlPath)
+  - ps: |
+      $zeroPaddedBuildNumber = [convert]::ToInt32($env:appveyor_build_number, 10).ToString("000000")
+      Update-AppveyorBuild -Version "1.0.0-pre$zeroPaddedBuildNumber"
+      $xmlPath = "$env:appveyor_build_folder\Vostok.Instrumentation.AspNetCore\Vostok.Instrumentation.AspNetCore.csproj"
+      $xml = [xml](get-content $xmlPath)
+      $version = $xml.CreateElement("Version")
+      $versionText = $xml.CreateTextNode($env:appveyor_build_version)
+      $version.AppendChild($versionText)
+      $xml.Project.PropertyGroup.AppendChild($version)
+      $xml.Save($xmlPath)
 after_build:
   - ps: Get-ChildItem .\Vostok.Logging.Serilog\bin\Debug\Vostok.Logging.Serilog.*.nupkg | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
   - ps: Get-ChildItem .\Vostok.Logging.Log4Net\bin\Debug\Vostok.Logging.Log4Net.*.nupkg | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
   - ps: Get-ChildItem .\Vostok.Instrumentation.WebApi\bin\Debug\Vostok.Instrumentation.WebApi.*.nupkg | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
   - ps: Get-ChildItem .\Vostok.Instrumentation.Topshelf\bin\Debug\Vostok.Instrumentation.Topshelf.*.nupkg | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
+  - ps: Get-ChildItem .\Vostok.Instrumentation.AspNetCore\bin\Debug\Vostok.Instrumentation.AspNetCore.*.nupkg | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
