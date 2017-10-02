@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Microsoft.Owin.Logging;
+﻿using Microsoft.Owin.Logging;
 using Vostok.Logging;
 
 namespace Vostok.Instrumentation.WebApi
@@ -15,7 +14,7 @@ namespace Vostok.Instrumentation.WebApi
 
         public ILogger Create(string name)
         {
-            return new VostokOwinLoggerAdapter(string.IsNullOrEmpty(name) ? log : log.WithProperties(new Dictionary<string, object> { { "owin.name", name } }));
+            return new VostokOwinLoggerAdapter(string.IsNullOrEmpty(name) ? log : log.ForContext("owin.name", name));
         }
     }
 }

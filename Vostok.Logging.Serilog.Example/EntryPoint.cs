@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading;
 using Serilog;
 using Vostok.Flow;
@@ -16,8 +15,8 @@ namespace Vostok.Logging.Serilog.Example
                 .CreateLogger();
 
             var log = new SerilogLog(Log.Logger)
-                .WithContext()
-                .WithProperties(new Dictionary<string, object> {{"SourceClass", typeof(EntryPoint)}});
+                .WithFlowContext()
+                .ForContext(typeof(EntryPoint));
 
             while (true)
             {

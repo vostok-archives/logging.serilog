@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using log4net;
 using log4net.Config;
 using Vostok.Flow;
@@ -13,8 +12,8 @@ namespace Vostok.Logging.Log4Net.Example
             XmlConfigurator.Configure();
 
             var log = new Log4NetLog(LogManager.GetLogger("Root"))
-                .WithContext()
-                .WithProperties(new Dictionary<string, object> {{"SourceClass", typeof(EntryPoint)}});
+                .WithFlowContext()
+                .ForContext(typeof(EntryPoint));
 
             using (Context.Properties.Use("TraceId", Guid.NewGuid()))
             {

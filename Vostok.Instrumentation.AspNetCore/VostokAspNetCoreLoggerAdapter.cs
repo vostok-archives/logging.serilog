@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Microsoft.Extensions.Logging;
 using Vostok.Logging;
 using LogLevel = Microsoft.Extensions.Logging.LogLevel;
@@ -19,7 +18,8 @@ namespace Vostok.Instrumentation.AspNetCore
         {
             if (!TranslateLogLevel(logLevel, out var vostokLogLevel) || !log.IsEnabledFor(vostokLogLevel))
                 return;
-            log.Log(new LogEvent(vostokLogLevel, exception, formatter(state, exception), Array.Empty<object>(), new Dictionary<string, object>()));
+
+            log.Log(new LogEvent(vostokLogLevel, exception, formatter(state, exception), Array.Empty<object>()));
         }
 
         public bool IsEnabled(LogLevel logLevel)

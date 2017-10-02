@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using Microsoft.Owin.Logging;
 using Vostok.Logging;
@@ -19,7 +18,8 @@ namespace Vostok.Instrumentation.WebApi
         {
             if (!TranslateLogLevel(eventType, out LogLevel logLevel) || !log.IsEnabledFor(logLevel))
                 return false;
-            log.Log(new LogEvent(logLevel, exception, formatter(state, exception), Array.Empty<object>(), new Dictionary<string, object>()));
+
+            log.Log(new LogEvent(logLevel, exception, formatter(state, exception), Array.Empty<object>()));
             return true;
         }
 

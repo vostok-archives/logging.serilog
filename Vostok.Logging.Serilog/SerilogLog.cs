@@ -21,9 +21,7 @@ namespace Vostok.Logging.Serilog
         {
             var level = TranslateLevel(logEvent.Level);
             if (!logger.IsEnabled(level))
-            {
                 return;
-            }
 
             var timestamp = DateTimeOffset.Now;
             var exception = logEvent.Exception;
@@ -44,9 +42,7 @@ namespace Vostok.Logging.Serilog
             {
                 LogEventProperty bindedProperty;
                 if (logger.BindProperty(property.Key, property.Value, false, out bindedProperty))
-                {
                     bindedProperties.Add(bindedProperty);
-                }
             }
             return bindedProperties;
         }
@@ -83,7 +79,7 @@ namespace Vostok.Logging.Serilog
 
         private struct Template
         {
-            public static readonly Template Empty = new Template(MessageTemplate.Empty, Array.Empty<LogEventProperty>()); 
+            public static readonly Template Empty = new Template(MessageTemplate.Empty, Array.Empty<LogEventProperty>());
 
             public Template(MessageTemplate messageTemplate, IEnumerable<LogEventProperty> parameters)
             {

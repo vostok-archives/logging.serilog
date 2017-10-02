@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Vostok.Logging;
 
 namespace Vostok.Instrumentation.AspNetCore
@@ -19,7 +18,7 @@ namespace Vostok.Instrumentation.AspNetCore
 
         public ILogger CreateLogger(string categoryName)
         {
-            return new VostokAspNetCoreLoggerAdapter(string.IsNullOrEmpty(categoryName) ? log : log.WithProperties(new Dictionary<string, object> { { "aspnetcore.name", categoryName } }));
+            return new VostokAspNetCoreLoggerAdapter(string.IsNullOrEmpty(categoryName) ? log : log.ForContext("aspnetcore.name", categoryName));
         }
     }
 }
