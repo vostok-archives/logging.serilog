@@ -1,9 +1,12 @@
 version: '1.0.0-pre{build}'
 image: Visual Studio 2017
+nuget:
+  project_feed: true
+  disable_publish_on_pr: true
 install:
   - nuget sources add -name core -source https://ci.appveyor.com/nuget/core-2nbdf5dfgymf
-  - nuget restore
-configuration: Debug
+  - dotnet restore
+configuration: Release
 before_build:
   - ps: |
       $zeroPaddedBuildNumber = [convert]::ToInt32($env:appveyor_build_number, 10).ToString("000000")
