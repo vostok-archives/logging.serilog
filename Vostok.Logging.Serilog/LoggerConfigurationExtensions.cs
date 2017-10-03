@@ -31,15 +31,5 @@ namespace Vostok.Logging.Serilog
             var enricher = new HostEnricher();
             return loggerConfiguration.With(enricher);
         }
-
-        public static LoggerConfiguration WithServiceName(
-            this LoggerEnrichmentConfiguration loggerConfiguration)
-        {
-            if (loggerConfiguration == null)
-                throw new ArgumentNullException(nameof(loggerConfiguration));
-
-            var enricher = new ServiceNameEnricher();
-            return loggerConfiguration.With(enricher);
-        }
     }
 }
