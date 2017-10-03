@@ -74,4 +74,4 @@ after_build:
   - ps: if ($env:appveyor_repo_branch -eq "master") { Get-ChildItem .\Vostok.Instrumentation.WebApi\bin\Release\Vostok.Instrumentation.WebApi.*.nupkg | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name } }
   - ps: if ($env:appveyor_repo_branch -eq "master") { Get-ChildItem .\Vostok.Instrumentation.Topshelf\bin\Release\Vostok.Instrumentation.Topshelf.*.nupkg | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name } }
   - ps: if ($env:appveyor_repo_branch -eq "master") { Get-ChildItem .\Vostok.Instrumentation.AspNetCore\bin\Release\Vostok.Instrumentation.AspNetCore.*.nupkg | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name } }
-  - ps: if ($env:appveyor_repo_branch -eq "master") { Get-ChildItem .\Serilog.Sinks.Vostok.Airlock\bin\Debug\Serilog.Sinks.Vostok.Airlock.*.nupkg | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name } }
+  - ps: if ($env:appveyor_repo_branch -eq "master") { Get-ChildItem .\Serilog.Sinks.Vostok.Airlock\bin\Release\Serilog.Sinks.Vostok.Airlock.*.nupkg | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name } }
