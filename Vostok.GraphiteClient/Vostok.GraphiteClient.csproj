@@ -2,6 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <AssemblyName>Vostok.GraphiteClient</AssemblyName>
+    <RootNamespace>Vostok.GraphiteClient</RootNamespace>
+    <Authors>Vostok team</Authors>
+    <Company>SKB Kontur</Company>
+    <Product>Vostok</Product>
   </PropertyGroup>
 
     <ItemGroup>
