@@ -14,11 +14,9 @@
 
 using System;
 using System.Linq;
-using Serilog.Events;
 using Vostok.Airlock;
 using Vostok.Logging;
 using Vostok.Logging.Airlock;
-using LogEvent = Vostok.Logging.LogEvent;
 
 namespace Serilog.Sinks.Vostok.Airlock
 {
@@ -55,21 +53,21 @@ namespace Serilog.Sinks.Vostok.Airlock
             airlock.Push("logs", logEventData);
         }
 
-        private LogLevel TranslateLevel(LogEventLevel level)
+        private LogLevel TranslateLevel(Events.LogEventLevel level)
         {
             switch (level)
             {
-                case LogEventLevel.Verbose:
+                case Events.LogEventLevel.Verbose:
                     return LogLevel.Trace;
-                case LogEventLevel.Debug:
+                case Events.LogEventLevel.Debug:
                     return LogLevel.Debug;
-                case LogEventLevel.Information:
+                case Events.LogEventLevel.Information:
                     return LogLevel.Info;
-                case LogEventLevel.Warning:
+                case Events.LogEventLevel.Warning:
                     return LogLevel.Warn;
-                case LogEventLevel.Error:
+                case Events.LogEventLevel.Error:
                     return LogLevel.Error;
-                case LogEventLevel.Fatal:
+                case Events.LogEventLevel.Fatal:
                     return LogLevel.Fatal;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(level), level, null);
