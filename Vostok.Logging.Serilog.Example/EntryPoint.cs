@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using Serilog;
+using Serilog.Events;
 using Vostok.Flow;
 
 namespace Vostok.Logging.Serilog.Example
@@ -10,7 +11,6 @@ namespace Vostok.Logging.Serilog.Example
         public static void Main()
         {
             Log.Logger = new LoggerConfiguration()
-                .Enrich.FromLogContext()
                 .WriteTo.Console(outputTemplate: "{Timestamp:HH:mm:ss.fff} {Level} {Message:l} {Exception}{NewLine}{Properties}{NewLine}")
                 .CreateLogger();
 
