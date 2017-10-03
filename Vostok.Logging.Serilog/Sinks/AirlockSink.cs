@@ -14,16 +14,18 @@
 
 using System;
 using System.Linq;
+using Serilog.Core;
 using Vostok.Airlock;
-using Vostok.Logging;
 using Vostok.Logging.Airlock;
+using SerilogEvent = Serilog.Events.LogEvent;
+using SerilogEventLevel = Serilog.Events.LogEventLevel;
 
-namespace Serilog.Sinks.Vostok.Airlock
+namespace Vostok.Logging.Serilog.Sinks
 {
     /// <summary>
     ///     Writes log events to the Airlock.
     /// </summary>
-    public class AirlockSink : Core.ILogEventSink
+    public class AirlockSink : ILogEventSink
     {
         private const int MaxMessageLength = 32 * 1024;
         private const int MaxExceptionLength = 32 * 1024;
@@ -39,35 +41,35 @@ namespace Serilog.Sinks.Vostok.Airlock
             this.airlock = airlock;
         }
 
-        public void Emit(Events.LogEvent logEvent)
+        public void Emit(SerilogEvent logEvent)
         {
             var logEventData = new LogEventData
             {
                 Timestamp = logEvent.Timestamp,
                 Level = TranslateLevel(logEvent.Level),
                 Message = logEvent.MessageTemplate.Render(logEvent.Properties).Truncate(MaxMessageLength),
-                Exception = logEvent.Exception?.ToString()?.Truncate(MaxExceptionLength),
+                Exception = logEvent.Exception?.ToString().Truncate(MaxExceptionLength),
                 Properties = logEvent.Properties.ToDictionary(x => x.Key, x => x.Value.ToString())
             };
 
             airlock.Push("logs", logEventData);
         }
 
-        private LogLevel TranslateLevel(Events.LogEventLevel level)
+        private LogLevel TranslateLevel(SerilogEventLevel level)
         {
             switch (level)
             {
-                case Events.LogEventLevel.Verbose:
+                case SerilogEventLevel.Verbose:
                     return LogLevel.Trace;
-                case Events.LogEventLevel.Debug:
+                case SerilogEventLevel.Debug:
                     return LogLevel.Debug;
-                case Events.LogEventLevel.Information:
+                case SerilogEventLevel.Information:
                     return LogLevel.Info;
-                case Events.LogEventLevel.Warning:
+                case SerilogEventLevel.Warning:
                     return LogLevel.Warn;
-                case Events.LogEventLevel.Error:
+                case SerilogEventLevel.Error:
                     return LogLevel.Error;
-                case Events.LogEventLevel.Fatal:
+                case SerilogEventLevel.Fatal:
                     return LogLevel.Fatal;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(level), level, null);

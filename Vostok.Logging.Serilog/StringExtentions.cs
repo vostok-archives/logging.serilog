@@ -1,6 +1,6 @@
 using System;
 
-namespace Serilog.Sinks.Vostok.Airlock
+namespace Vostok.Logging.Serilog
 {
     internal static class StringExtentions
     {
