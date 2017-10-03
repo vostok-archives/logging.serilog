@@ -12,7 +12,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Owin" Version="3.1.0" />
-    <PackageReference Include="Vostok.Core" Version="1.0.0-pre000068" />
+    <PackageReference Include="Vostok.Core" Version="1.0.0-pre000079" />
   </ItemGroup>
 
 </Project>
