@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Vostok.Graphite.Client\Vostok.Graphite.Client.csproj" />
+    <ProjectReference Include="..\Vostok.GraphiteClient\Vostok.GraphiteClient.csproj" />
   </ItemGroup>
 
 </Project>

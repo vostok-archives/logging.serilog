@@ -17,9 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vostok.Instrumentation.WebA
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vostok.Instrumentation.AspNetCore", "Vostok.Instrumentation.AspNetCore\Vostok.Instrumentation.AspNetCore.csproj", "{8085968E-B15A-40E6-BEC4-796737CDFEE4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vostok.Graphite.Client", "Vostok.Graphite.Client\Vostok.Graphite.Client.csproj", "{376B3D48-654E-41B7-8DB4-630799A20143}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vostok.GraphiteClient", "Vostok.GraphiteClient\Vostok.GraphiteClient.csproj", "{376B3D48-654E-41B7-8DB4-630799A20143}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vostok.Graphite.Client.Example", "Vostok.Graphite.Client.Example\Vostok.Graphite.Client.Example.csproj", "{59BB944E-D09A-425F-BCF7-9354DF7F7DE0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vostok.GraphiteClient.Example", "Vostok.GraphiteClient.Example\Vostok.GraphiteClient.Example.csproj", "{59BB944E-D09A-425F-BCF7-9354DF7F7DE0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

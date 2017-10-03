@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Text;
 
-namespace Vostok.Graphite.Client
+namespace Vostok.GraphiteClient
 {
 
     public class Metric

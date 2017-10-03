@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Vostok.Graphite.Client.Example
+namespace Vostok.GraphiteClient.Example
 {
     class Program
     {

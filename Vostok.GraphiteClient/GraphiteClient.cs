@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Vostok.Commons.Collections;
 
-namespace Vostok.Graphite.Client
+namespace Vostok.GraphiteClient
 {
     public class GraphiteClient
     {
