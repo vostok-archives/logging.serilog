@@ -13,12 +13,13 @@ namespace Vostok.Logging.Serilog
         public static LoggerConfiguration Airlock(
             this LoggerSinkConfiguration loggerConfiguration,
             IAirlock airlock,
+            string routingKey,
             LogEventLevel restrictedToMinimumLevel = LevelAlias.Minimum)
         {
             if (loggerConfiguration == null)
                 throw new ArgumentNullException(nameof(loggerConfiguration));
 
-            var sink = new AirlockSink(airlock);
+            var sink = new AirlockSink(airlock, routingKey);
             return loggerConfiguration.Sink(sink, restrictedToMinimumLevel);
         }
 
