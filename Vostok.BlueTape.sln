@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vostok.Logging.Serilog", "Vostok.Logging.Serilog\Vostok.Logging.Serilog.csproj", "{9DAA8DF7-9AC1-4DD3-BD24-C92A8269AC58}"
 EndProject
@@ -16,10 +16,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vostok.Instrumentation.WebApi", "Vostok.Instrumentation.WebApi\Vostok.Instrumentation.WebApi.csproj", "{5B8E1507-BD51-48EB-8DE8-81023C00E42D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vostok.Instrumentation.AspNetCore", "Vostok.Instrumentation.AspNetCore\Vostok.Instrumentation.AspNetCore.csproj", "{8085968E-B15A-40E6-BEC4-796737CDFEE4}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vostok.GraphiteClient", "Vostok.GraphiteClient\Vostok.GraphiteClient.csproj", "{376B3D48-654E-41B7-8DB4-630799A20143}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vostok.GraphiteClient.Example", "Vostok.GraphiteClient.Example\Vostok.GraphiteClient.Example.csproj", "{59BB944E-D09A-425F-BCF7-9354DF7F7DE0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,14 +51,6 @@ Global
 		{8085968E-B15A-40E6-BEC4-796737CDFEE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8085968E-B15A-40E6-BEC4-796737CDFEE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8085968E-B15A-40E6-BEC4-796737CDFEE4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{376B3D48-654E-41B7-8DB4-630799A20143}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{376B3D48-654E-41B7-8DB4-630799A20143}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{376B3D48-654E-41B7-8DB4-630799A20143}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{376B3D48-654E-41B7-8DB4-630799A20143}.Release|Any CPU.Build.0 = Release|Any CPU
-		{59BB944E-D09A-425F-BCF7-9354DF7F7DE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{59BB944E-D09A-425F-BCF7-9354DF7F7DE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{59BB944E-D09A-425F-BCF7-9354DF7F7DE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{59BB944E-D09A-425F-BCF7-9354DF7F7DE0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
