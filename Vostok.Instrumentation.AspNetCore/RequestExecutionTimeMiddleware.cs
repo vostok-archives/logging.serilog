@@ -6,11 +6,11 @@ using Vostok.Logging;
 
 namespace Vostok.Instrumentation.AspNetCore
 {
-    public class VostokAspNetCoreMiddleware
+    public class RequestExecutionTimeMiddleware
     {
         private readonly ILog log;
 
-        public VostokAspNetCoreMiddleware(ILog log)
+        public RequestExecutionTimeMiddleware(ILog log)
         {
             this.log = log;
         }
