@@ -1,23 +1,20 @@
 ﻿using System;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
+using Vostok.Logging;
 
 namespace Vostok.Instrumentation.AspNetCore
 {
     public static class LoggingBuilderExtensions
     {
-        public static ILoggingBuilder AddVostok(this ILoggingBuilder builder, Logging.ILog log)
+        public static Microsoft.Extensions.Logging.ILoggingBuilder AddVostok(this Microsoft.Extensions.Logging.ILoggingBuilder builder, ILog log)
         {
-            var loggerProvider = new LoggerProvider(log);
-            builder.Services.AddSingleton<ILoggerProvider>(loggerProvider);
-            return builder;
+            return Microsoft.Extensions.Logging.LoggingBuilderExtensions.AddProvider(builder, new LoggerProvider(log));
         }
 
-        private class LoggerProvider : ILoggerProvider
+        private class LoggerProvider : Microsoft.Extensions.Logging.ILoggerProvider
         {
-            private readonly Logging.ILog log;
+            private readonly ILog log;
 
-            public LoggerProvider(Logging.ILog log)
+            public LoggerProvider(ILog log)
             {
                 this.log = log;
             }
@@ -26,30 +23,42 @@ namespace Vostok.Instrumentation.AspNetCore
             {
             }
 
-            public ILogger CreateLogger(string categoryName)
+            public Microsoft.Extensions.Logging.ILogger CreateLogger(string categoryName)
             {
-                return new LoggerAdapter(string.IsNullOrEmpty(categoryName) ? log : Logging.ILogExtensions.ForContext(log, "aspnetcore.name", categoryName));
+                if (string.IsNullOrEmpty(categoryName))
+                {
+                    return new LoggerAdapter(log);
+                }
+
+                var categoryLog = log.ForContext("aspnetcore.name", categoryName);
+
+                if (categoryName.StartsWith("Microsoft") || categoryName.StartsWith("System"))
+                {
+                    return new LoggerAdapter(categoryLog.FilterByLevel(LogLevel.Error));
+                }
+
+                return new LoggerAdapter(categoryLog);
             }
         }
 
-        private class LoggerAdapter : ILogger
+        private class LoggerAdapter : Microsoft.Extensions.Logging.ILogger
         {
-            private readonly Logging.ILog log;
+            private readonly ILog log;
 
-            public LoggerAdapter(Logging.ILog log)
+            public LoggerAdapter(ILog log)
             {
                 this.log = log;
             }
 
-            public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
+            public void Log<TState>(Microsoft.Extensions.Logging.LogLevel logLevel, Microsoft.Extensions.Logging.EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
             {
                 if (!TranslateLogLevel(logLevel, out var vostokLogLevel) || !log.IsEnabledFor(vostokLogLevel))
                     return;
 
-                log.Log(new Logging.LogEvent(vostokLogLevel, exception, formatter(state, exception), Array.Empty<object>()));
+                log.Log(new LogEvent(vostokLogLevel, exception, formatter(state, exception), Array.Empty<object>()));
             }
 
-            public bool IsEnabled(LogLevel logLevel)
+            public bool IsEnabled(Microsoft.Extensions.Logging.LogLevel logLevel)
             {
                 return TranslateLogLevel(logLevel, out var vostokLogLevel) && log.IsEnabledFor(vostokLogLevel);
             }
@@ -60,30 +69,30 @@ namespace Vostok.Instrumentation.AspNetCore
                 return new Scope();
             }
 
-            private static bool TranslateLogLevel(LogLevel logLevel, out Logging.LogLevel vostokLogLevel)
+            private static bool TranslateLogLevel(Microsoft.Extensions.Logging.LogLevel logLevel, out LogLevel vostokLogLevel)
             {
                 switch (logLevel)
                 {
-                    case LogLevel.Trace:
-                        vostokLogLevel = Logging.LogLevel.Trace;
+                    case Microsoft.Extensions.Logging.LogLevel.Trace:
+                        vostokLogLevel = LogLevel.Trace;
                         return true;
-                    case LogLevel.Debug:
-                        vostokLogLevel = Logging.LogLevel.Debug;
+                    case Microsoft.Extensions.Logging.LogLevel.Debug:
+                        vostokLogLevel = LogLevel.Debug;
                         return true;
-                    case LogLevel.Information:
-                        vostokLogLevel = Logging.LogLevel.Info;
+                    case Microsoft.Extensions.Logging.LogLevel.Information:
+                        vostokLogLevel = LogLevel.Info;
                         return true;
-                    case LogLevel.Warning:
-                        vostokLogLevel = Logging.LogLevel.Warn;
+                    case Microsoft.Extensions.Logging.LogLevel.Warning:
+                        vostokLogLevel = LogLevel.Warn;
                         return true;
-                    case LogLevel.Error:
-                        vostokLogLevel = Logging.LogLevel.Error;
+                    case Microsoft.Extensions.Logging.LogLevel.Error:
+                        vostokLogLevel = LogLevel.Error;
                         return true;
-                    case LogLevel.Critical:
-                        vostokLogLevel = Logging.LogLevel.Fatal;
+                    case Microsoft.Extensions.Logging.LogLevel.Critical:
+                        vostokLogLevel = LogLevel.Fatal;
                         return true;
                     default:
-                        vostokLogLevel = default(Logging.LogLevel);
+                        vostokLogLevel = default(LogLevel);
                         return false;
                 }
             }
