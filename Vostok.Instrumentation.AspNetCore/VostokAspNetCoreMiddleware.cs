@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Extensions;
 using Vostok.Logging;
 
 namespace Vostok.Instrumentation.AspNetCore
@@ -18,11 +17,34 @@ namespace Vostok.Instrumentation.AspNetCore
 
         public async Task InvokeAsync(HttpContext context, Func<Task> next)
         {
-            log.Info($"Start request {context.Request.Method} {context.Request.GetDisplayUrl()}");
+            log.Info(
+                "Request {Method} {Scheme}://{Host}{PathBase}{Path}{QueryString} started",
+                context.Request.Method,
+                context.Request.Scheme,
+                context.Request.Host.Value,
+                context.Request.PathBase.Value,
+                context.Request.Path.Value,
+                context.Request.QueryString.Value);
+
             var stopwatch = Stopwatch.StartNew();
-            await next.Invoke().ConfigureAwait(false);
-            stopwatch.Stop();
-            log.Info($"End request ({stopwatch.ElapsedMilliseconds} ms) {context.Response.StatusCode} {context.Request.Method} {context.Request.GetDisplayUrl()}");
+
+            try
+            {
+                await next.Invoke().ConfigureAwait(false);
+            }
+            finally
+            {
+                log.Info(
+                    "Request {Method} {Scheme}://{Host}{PathBase}{Path}{QueryString} finished with {StatusCode} after {ElapsedMs} ms",
+                    context.Request.Method,
+                    context.Request.Scheme,
+                    context.Request.Host.Value,
+                    context.Request.PathBase.Value,
+                    context.Request.Path.Value,
+                    context.Request.QueryString.Value,
+                    context.Response.StatusCode,
+                    stopwatch.ElapsedMilliseconds);
+            }
         }
     }
 }
