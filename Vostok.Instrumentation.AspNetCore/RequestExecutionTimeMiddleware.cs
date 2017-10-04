@@ -5,16 +5,18 @@ using Vostok.Logging;
 
 namespace Vostok.Instrumentation.AspNetCore
 {
-    public class RequestExecutionTimeMiddleware : IMiddleware
+    public class RequestExecutionTimeMiddleware
     {
+        private readonly RequestDelegate next;
         private readonly ILog log;
 
-        public RequestExecutionTimeMiddleware(ILog log)
+        public RequestExecutionTimeMiddleware(RequestDelegate next, ILog log)
         {
+            this.next = next;
             this.log = log;
         }
 
-        public async Task InvokeAsync(HttpContext context, RequestDelegate next)
+        public async Task Invoke(HttpContext context)
         {
             log.Info(
                 "Request {Method} {Scheme}://{Host}{PathBase}{Path}{QueryString} started",
