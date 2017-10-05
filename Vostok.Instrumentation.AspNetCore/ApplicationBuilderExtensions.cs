@@ -7,7 +7,8 @@ namespace Vostok.Instrumentation.AspNetCore
         public static IApplicationBuilder UseVostok(this IApplicationBuilder app)
         {
             return app.UseMiddleware<RequestExecutionTimeMiddleware>()
-                .UseMiddleware<RequestExecutionDistributedContextMiddleware>();
+                .UseMiddleware<RequestExecutionDistributedContextMiddleware>()
+                .UseMiddleware<RequestExecutionTraceMiddleware>();
         }
     }
 }
