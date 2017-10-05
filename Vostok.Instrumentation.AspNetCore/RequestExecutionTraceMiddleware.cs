@@ -24,30 +24,29 @@ namespace Vostok.Instrumentation.AspNetCore
             using (var spanBuilder = Trace.BeginSpan())
             {
                 var url = GetUrl(context.Request);
-                spanBuilder.SetAnnotation("operation", GetOperationName(context.Request.Method, url));
-                spanBuilder.SetAnnotation("kind", "http-server");
-                spanBuilder.SetAnnotation("service", serviceName);
-                spanBuilder.SetAnnotation("host", HostnameProvider.Get());
-                spanBuilder.SetAnnotation("http.url", url.ToStringWithoutQuery());
+                spanBuilder.SetAnnotation(TracingAnnotationNames.Operation, GetOperationName(context.Request.Method, url));
+                spanBuilder.SetAnnotation(TracingAnnotationNames.Kind, "http-server");
+                spanBuilder.SetAnnotation(TracingAnnotationNames.Service, serviceName);
+                spanBuilder.SetAnnotation(TracingAnnotationNames.Host, HostnameProvider.Get());
+                spanBuilder.SetAnnotation(TracingAnnotationNames.HttpUrl, url.ToStringWithoutQuery());
                 if (context.Request.ContentLength.HasValue)
                 {
-                    spanBuilder.SetAnnotation("http.requestСontentLength", context.Request.ContentLength);
+                    spanBuilder.SetAnnotation(TracingAnnotationNames.HttpRequestContentLength, context.Request.ContentLength);
                 }
 
                 await next.Invoke(context).ConfigureAwait(false);
 
                 if (context.Response.ContentLength.HasValue)
                 {
-                    spanBuilder.SetAnnotation("http.responseСontentLength", context.Response.ContentLength);
+                    spanBuilder.SetAnnotation(TracingAnnotationNames.HttpResponseContentLength, context.Response.ContentLength);
                 }
-                spanBuilder.SetAnnotation("http.code", context.Response.StatusCode);
+                spanBuilder.SetAnnotation(TracingAnnotationNames.HttpCode, context.Response.StatusCode);
             }
         }
 
         private static string GetOperationName(string httpMethod, Uri url)
         {
             var normalizedUrl = url.Normalize();
-
             return httpMethod + " " + normalizedUrl;
         }
 
@@ -56,6 +55,5 @@ namespace Vostok.Instrumentation.AspNetCore
             var absoluteUrl = UriHelper.BuildAbsolute(request.Scheme, request.Host, request.PathBase, request.Path, request.QueryString);
             return new Uri(absoluteUrl);
         }
-
-}
+    }
 }
