@@ -1,7 +1,4 @@
-# bluetape
-Connectors for third-party libraries
-
-# Инструментация AspNetCore
+# Инструментация AspNetCore [![Build status](https://ci.appveyor.com/api/projects/status/p8rdj4uu19l3p368/branch/master?svg=true)](https://ci.appveyor.com/project/vostok/log4net/branch/master)
 
 ## Свойства контекста запроса
 * TraceId
