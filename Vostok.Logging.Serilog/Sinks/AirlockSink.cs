@@ -18,12 +18,12 @@ namespace Vostok.Logging.Serilog.Sinks
         private const int MaxMessageLength = 32 * 1024;
         private const int MaxExceptionLength = 32 * 1024;
 
-        private readonly IAirlock airlock;
+        private readonly IAirlockClient airlockClient;
         private readonly string routingKey;
 
-        public AirlockSink(IAirlock airlock, string routingKey)
+        public AirlockSink(IAirlockClient airlockClient, string routingKey)
         {
-            this.airlock = airlock;
+            this.airlockClient = airlockClient;
             this.routingKey = routingKey;
         }
 
@@ -38,7 +38,7 @@ namespace Vostok.Logging.Serilog.Sinks
                 Properties = logEvent.Properties.ToDictionary(x => x.Key, x => x.Value.ToString())
             };
 
-            airlock.Push(routingKey, logEventData);
+            airlockClient.Push(routingKey, logEventData);
         }
 
         private LogLevel TranslateLevel(SerilogEventLevel level)
