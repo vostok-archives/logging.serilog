@@ -24,9 +24,9 @@ namespace Vostok.Instrumentation.AspNetCore
             using (var spanBuilder = Trace.BeginSpan())
             {
                 var url = GetUrl(context.Request);
-                spanBuilder.SetAnnotation("operationName", GetOperationName(context.Request.Method, url));
+                spanBuilder.SetAnnotation("operation", GetOperationName(context.Request.Method, url));
                 spanBuilder.SetAnnotation("kind", "http-server");
-                spanBuilder.SetAnnotation("serviceName", serviceName);
+                spanBuilder.SetAnnotation("service", serviceName);
                 spanBuilder.SetAnnotation("host", HostnameProvider.Get());
                 spanBuilder.SetAnnotation("http.url", url.ToStringWithoutQuery());
                 if (context.Request.ContentLength.HasValue)
