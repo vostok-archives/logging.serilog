@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using Vostok.Airlock;
 using Vostok.Clusterclient.Topology;
-using Vostok.Commons.Extensions.UnitConvertions;
 using Vostok.Logging;
 using Vostok.Logging.Serilog;
 using Vostok.Metrics;
@@ -18,28 +17,10 @@ namespace Vostok.Instrumentation.AspNetCore
         public static IWebHostBuilder UseVostok(this IWebHostBuilder builder)
         {
             return builder
-                .UseVostokCore()
-                .UseVostokSystemMetrics(10.Seconds())
-                .UseVostokMiddleware();
-        }
-
-        public static IWebHostBuilder UseVostokCore(this IWebHostBuilder builder)
-        {
-            return builder
                 .ConfigureAirlock()
                 .ConfigureVostokMetrics()
                 .ConfigureVostokLogging()
                 .ConfigureVostokTracing();
-        }
-
-        public static IWebHostBuilder UseVostokMiddleware(this IWebHostBuilder builder)
-        {
-            return builder.Configure(app =>
-            {
-                var configuration = app.ApplicationServices.GetService<IConfiguration>();
-                var service = configuration.GetValue<string>("service");
-                app.UseVostok(service);
-            });
         }
 
         public static IWebHostBuilder ConfigureVostokLogging(this IWebHostBuilder builder)
@@ -51,11 +32,6 @@ namespace Vostok.Instrumentation.AspNetCore
                     var log = BuildLog(hostingContext.Configuration, airlockClient);
                     logging.AddVostok(log);
                     logging.Services.AddSingleton(log);
-                })
-                .Configure(app =>
-                {
-                    var applicationLifetime = app.ApplicationServices.GetRequiredService<IApplicationLifetime>();
-                    applicationLifetime.ApplicationStopped.Register(Log.CloseAndFlush);
                 });
         }
 
@@ -115,16 +91,6 @@ namespace Vostok.Instrumentation.AspNetCore
                         Environment = environment
                     };
                     services.AddSingleton<IMetricConfiguration>(metricConfiguration);
-                });
-        }
-
-        public static IWebHostBuilder UseVostokSystemMetrics(this IWebHostBuilder builder, TimeSpan period)
-        {
-            return builder
-                .Configure(app =>
-                {
-                    var metricConfiguration = app.ApplicationServices.GetService<IMetricConfiguration>();
-                    new RootMetricScope(metricConfiguration).SystemMetrics(period);
                 });
         }
 
