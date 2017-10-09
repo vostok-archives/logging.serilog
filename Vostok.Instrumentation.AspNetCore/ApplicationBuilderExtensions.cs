@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using Vostok.Commons.Extensions.UnitConvertions;
@@ -10,9 +11,12 @@ namespace Vostok.Instrumentation.AspNetCore
 {
     public static class ApplicationBuilderExtensions
     {
-        public static IApplicationBuilder UseVostok(this IApplicationBuilder app, string serviceName)
+        public static IApplicationBuilder UseVostok(this IApplicationBuilder app)
         {
-            return app.UseMiddleware<RequestExecutionTraceMiddleware>(serviceName)
+            var configuration = app.ApplicationServices.GetService<IConfiguration>();
+            var service = configuration.GetValue<string>("service");
+
+            return app.UseMiddleware<RequestExecutionTraceMiddleware>(service)
                 .UseMiddleware<RequestExecutionDistributedContextMiddleware>()
                 .UseMiddleware<RequestExecutionTimeMiddleware>()
                 .UseVostokLogging()
