@@ -4,11 +4,11 @@ namespace Vostok.Instrumentation.AspNetCore
 {
     public static class ApplicationBuilderExtensions
     {
-        public static IApplicationBuilder UseVostok(this IApplicationBuilder app)
+        public static IApplicationBuilder UseVostok(this IApplicationBuilder app, string serviceName)
         {
-            return app.UseMiddleware<RequestExecutionTimeMiddleware>()
+            return app.UseMiddleware<RequestExecutionTraceMiddleware>(serviceName)
                 .UseMiddleware<RequestExecutionDistributedContextMiddleware>()
-                .UseMiddleware<RequestExecutionTraceMiddleware>();
+                .UseMiddleware<RequestExecutionTimeMiddleware>();
         }
     }
 }

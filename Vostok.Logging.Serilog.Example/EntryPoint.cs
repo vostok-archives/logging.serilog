@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using Serilog;
-using Serilog.Events;
 using Vostok.Flow;
 
 namespace Vostok.Logging.Serilog.Example
