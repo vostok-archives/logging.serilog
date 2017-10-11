@@ -15,6 +15,8 @@ namespace Vostok.Instrumentation.AspNetCore
 {
     public static class WebHostBuilderExtensions
     {
+        private const string LogOutputTemplate = "{Timestamp:HH:mm:ss.fff} {Level} {Message:l} {Exception}{NewLine}{Properties}{NewLine}";
+
         public static IWebHostBuilder UseVostok(this IWebHostBuilder builder)
         {
             return builder
@@ -30,7 +32,22 @@ namespace Vostok.Instrumentation.AspNetCore
                 {
                     var serviceProvider = logging.Services.BuildServiceProvider();
                     var airlockClient = serviceProvider.GetService<IAirlockClient>();
-                    var log = BuildLog(hostingContext.Configuration, airlockClient);
+                    var loggingSection = hostingContext.Configuration.GetSection("logging");
+                    var rollingFileSection = loggingSection.GetSection("rollingFile");
+                    var rollingFilePathFormat = rollingFileSection.GetValue<string>("pathFormat");
+                    var service = hostingContext.Configuration.GetValue<string>("service");
+                    var project = hostingContext.Configuration.GetValue<string>("project");
+                    var environment = hostingContext.Configuration.GetValue<string>("environment");
+                    var routingKeyPrefix = RoutingKey.Create(project, environment, service, "logs");
+
+                    Log.Logger = new LoggerConfiguration()
+                        .Enrich.WithHost()
+                        .Enrich.WithProperty("Service", service)
+                        .WriteTo.Airlock(airlockClient, routingKeyPrefix)
+                        .WriteTo.Async(x => x.RollingFile(rollingFilePathFormat, outputTemplate: LogOutputTemplate))
+                        .CreateLogger();
+                    var log = new SerilogLog(Log.Logger).WithFlowContext();
+
                     logging.AddVostok(log);
                     logging.Services.AddSingleton(log);
                 });
@@ -44,7 +61,12 @@ namespace Vostok.Instrumentation.AspNetCore
                 var airlockConfigSection = airlockSection.GetSection("config");
                 var airlockApiKey = airlockConfigSection.GetValue<string>("apiKey");
                 var airlockHost = airlockConfigSection.GetValue<Uri>("host");
-                var log = BuildLog(hostingContext.Configuration, null);
+                var logFilePathFormat = airlockSection.GetValue<string>("logFilePathFormat");
+
+                var logger = new LoggerConfiguration()
+                    .WriteTo.Async(x => x.RollingFile(logFilePathFormat, outputTemplate: LogOutputTemplate))
+                    .CreateLogger();
+                var log = new SerilogLog(logger).WithFlowContext();
 
                 var airlockClient = new AirlockClient(new AirlockConfig
                 {
@@ -60,16 +82,16 @@ namespace Vostok.Instrumentation.AspNetCore
             return builder
                 .ConfigureServices((hostingContext, services) =>
                 {
-                    Trace.Configuration.IsEnabled = () => true;
-
                     var serviceProvider = services.BuildServiceProvider();
-                    Trace.Configuration.AirlockClient = serviceProvider.GetService<IAirlockClient>();
-                    
+                    var airlockClient = serviceProvider.GetService<IAirlockClient>();
                     var configuration = serviceProvider.GetService<IConfiguration>();
                     var service = configuration.GetValue<string>("service");
                     var project = configuration.GetValue<string>("project");
                     var environment = configuration.GetValue<string>("environment");
                     var routingKey = RoutingKey.Create(project, environment, service, "traces");
+
+                    Trace.Configuration.IsEnabled = () => true;
+                    Trace.Configuration.AirlockClient = airlockClient;
                     Trace.Configuration.AirlockRoutingKey = () => routingKey;
                 });
         }
@@ -94,37 +116,6 @@ namespace Vostok.Instrumentation.AspNetCore
                     services.AddSingleton<IMetricConfiguration>(metricConfiguration);
                     services.AddSingleton<IMetricScope>(new RootMetricScope(metricConfiguration));
                 });
-        }
-
-        private static ILog BuildLog(IConfiguration configuration, IAirlockClient airlockClient)
-        {
-            var loggingSection = configuration.GetSection("logging");
-
-            var rollingFileSection = loggingSection.GetSection("rollingFile");
-            var rollingFilePathFormat = rollingFileSection.GetValue<string>("pathFormat");
-
-            var service = configuration.GetValue<string>("service");
-            var project = configuration.GetValue<string>("project");
-            var environment = configuration.GetValue<string>("environment");
-            var routingKeyPrefix = RoutingKey.Create(project, environment, service, "logs");
-
-            const string outputTemplate = "{Timestamp:HH:mm:ss.fff} {Level} {Message:l} {Exception}{NewLine}{Properties}{NewLine}";
-
-            var loggerConfiguration = new LoggerConfiguration()
-                .Enrich.WithHost()
-                .Enrich.WithProperty("Service", service);
-
-            if (airlockClient != null)
-            {
-                loggerConfiguration = loggerConfiguration.WriteTo.Airlock(airlockClient, routingKeyPrefix);
-            }
-
-            Log.Logger = loggerConfiguration
-                .WriteTo.Async(x => x.RollingFile(rollingFilePathFormat, outputTemplate: outputTemplate))
-                .WriteTo.Console(outputTemplate: outputTemplate)
-                .CreateLogger();
-
-            return new SerilogLog(Log.Logger).WithFlowContext();
         }
     }
 }
