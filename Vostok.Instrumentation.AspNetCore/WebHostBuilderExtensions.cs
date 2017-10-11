@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using Vostok.Airlock;
 using Vostok.Clusterclient.Topology;
+using Vostok.Commons.Extensions.UnitConvertions;
 using Vostok.Logging;
 using Vostok.Logging.Serilog;
 using Vostok.Metrics;
@@ -91,6 +92,7 @@ namespace Vostok.Instrumentation.AspNetCore
                         Environment = environment
                     };
                     services.AddSingleton<IMetricConfiguration>(metricConfiguration);
+                    services.AddSingleton<IMetricScope>(new RootMetricScope(metricConfiguration));
                 });
         }
 

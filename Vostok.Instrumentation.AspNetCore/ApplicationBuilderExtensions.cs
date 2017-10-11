@@ -33,9 +33,7 @@ namespace Vostok.Instrumentation.AspNetCore
 
         public static IApplicationBuilder UseVostokSystemMetrics(this IApplicationBuilder app, TimeSpan period)
         {
-            var metricConfiguration = app.ApplicationServices.GetService<IMetricConfiguration>();
-            new RootMetricScope(metricConfiguration).SystemMetrics(period);
-
+            app.ApplicationServices.GetService<IMetricScope>().SystemMetrics(period);
             return app;
         }
     }
