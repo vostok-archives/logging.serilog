@@ -44,7 +44,6 @@ namespace Vostok.Instrumentation.AspNetCore
                         .Enrich.WithProperty("Service", service)
                         .WriteTo.Airlock(airlockClient, routingKeyPrefix)
                         .WriteTo.Async(x => x.RollingFile(rollingFilePathFormat, outputTemplate: LogOutputTemplate))
-                        .WriteTo.Console(outputTemplate: LogOutputTemplate)
                         .CreateLogger();
                     var log = new SerilogLog(Log.Logger).WithFlowContext();
 
