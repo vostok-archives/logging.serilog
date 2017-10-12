@@ -16,8 +16,8 @@ namespace Vostok.Instrumentation.AspNetCore
             var configuration = app.ApplicationServices.GetService<IConfiguration>();
             var service = configuration.GetValue<string>("service");
 
-            return app.UseMiddleware<RequestExecutionTimeMiddleware>()
-                .UseMiddleware<RequestExecutionDistributedContextMiddleware>()
+            return app.UseMiddleware<RequestExecutionDistributedContextMiddleware>()
+                .UseMiddleware<RequestExecutionTimeMiddleware>()
                 .UseMiddleware<RequestExecutionTraceMiddleware>(service)
                 .UseVostokLogging()
                 .UseVostokSystemMetrics(10.Seconds());
