@@ -28,7 +28,7 @@ namespace Vostok.Instrumentation.AspNetCore
                 spanBuilder.SetAnnotation(TracingAnnotationNames.Kind, "http-server");
                 spanBuilder.SetAnnotation(TracingAnnotationNames.Service, serviceName);
                 spanBuilder.SetAnnotation(TracingAnnotationNames.Host, HostnameProvider.Get());
-                spanBuilder.SetAnnotation(TracingAnnotationNames.HttpUrl, url.GetLeftPart(UriPartial.Path));
+                spanBuilder.SetAnnotation(TracingAnnotationNames.HttpUrl, url.ToStringWithoutQuery());
                 if (context.Request.ContentLength.HasValue)
                 {
                     spanBuilder.SetAnnotation(TracingAnnotationNames.HttpRequestContentLength, context.Request.ContentLength);
