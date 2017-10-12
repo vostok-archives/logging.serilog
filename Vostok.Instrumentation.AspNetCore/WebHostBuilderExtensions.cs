@@ -61,7 +61,7 @@ namespace Vostok.Instrumentation.AspNetCore
                 var airlockConfigSection = airlockSection.GetSection("config");
                 var airlockApiKey = airlockConfigSection.GetValue<string>("apiKey");
                 var airlockHost = airlockConfigSection.GetValue<Uri>("host");
-                var logFilePathFormat = airlockSection.GetValue<string>("logFilePathFormat");
+                var logFilePathFormat = airlockConfigSection.GetValue<string>("logFilePathFormat");
 
                 var logger = new LoggerConfiguration()
                     .WriteTo.Async(x => x.RollingFile(logFilePathFormat, outputTemplate: LogOutputTemplate))
