@@ -4,7 +4,7 @@ namespace Vostok.Logging.Serilog
 {
     internal static class StringExtentions
     {
-        private const string Pattern = "{0}[truncated {1}]";
+        private const string pattern = "{0}[truncated {1}]";
 
         public static string Truncate(this string source, int length)
         {
@@ -12,9 +12,9 @@ namespace Vostok.Logging.Serilog
                 return source;
 
             var x = source.Length - length;
-            var y = Pattern.Length - 6 + GetNumberOfDigits(x);
+            var y = pattern.Length - 6 + GetNumberOfDigits(x);
             var truncatedCount = x + y + (GetNumberOfDigits(x + y) > GetNumberOfDigits(x) ? 1 : 0);
-            return string.Format(Pattern, source.Substring(0, source.Length - truncatedCount), truncatedCount);
+            return string.Format(pattern, source.Substring(0, source.Length - truncatedCount), truncatedCount);
         }
 
         private static int GetNumberOfDigits(int i)

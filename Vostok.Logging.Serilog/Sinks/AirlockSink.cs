@@ -10,8 +10,8 @@ namespace Vostok.Logging.Serilog.Sinks
 {
     public class AirlockSink : ILogEventSink
     {
-        private const int MaxMessageLength = 32 * 1024;
-        private const int MaxExceptionLength = 32 * 1024;
+        private const int maxMessageLength = 32*1024;
+        private const int maxExceptionLength = 32*1024;
 
         private readonly IAirlockClient airlockClient;
         private readonly string routingKey;
@@ -28,8 +28,8 @@ namespace Vostok.Logging.Serilog.Sinks
             {
                 Timestamp = logEvent.Timestamp,
                 Level = TranslateLevel(logEvent.Level),
-                Message = logEvent.MessageTemplate.Render(logEvent.Properties).Truncate(MaxMessageLength),
-                Exception = logEvent.Exception?.ToString().Truncate(MaxExceptionLength),
+                Message = logEvent.MessageTemplate.Render(logEvent.Properties).Truncate(maxMessageLength),
+                Exception = logEvent.Exception?.ToString().Truncate(maxExceptionLength),
                 Properties = logEvent.Properties.ToDictionary(x => x.Key, x => x.Value.ToString())
             };
 
