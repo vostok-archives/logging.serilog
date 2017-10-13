@@ -10,11 +10,6 @@ namespace Vostok.Logging.Serilog.Sinks
 {
     public class AirlockSink : ILogEventSink
     {
-        static AirlockSink()
-        {
-            AirlockSerializerRegistry.Register(new LogEventDataSerializer());
-        }
-
         private const int MaxMessageLength = 32 * 1024;
         private const int MaxExceptionLength = 32 * 1024;
 
