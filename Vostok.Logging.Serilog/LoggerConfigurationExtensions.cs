@@ -3,7 +3,6 @@ using Serilog;
 using Serilog.Configuration;
 using Serilog.Events;
 using Vostok.Airlock;
-using Vostok.Logging.Serilog.Enrichers;
 using Vostok.Logging.Serilog.Sinks;
 
 namespace Vostok.Logging.Serilog
@@ -21,16 +20,6 @@ namespace Vostok.Logging.Serilog
 
             var sink = new AirlockSink(airlockClient, routingKey);
             return loggerConfiguration.Sink(sink, restrictedToMinimumLevel);
-        }
-
-        public static LoggerConfiguration WithHost(
-            this LoggerEnrichmentConfiguration loggerConfiguration)
-        {
-            if (loggerConfiguration == null)
-                throw new ArgumentNullException(nameof(loggerConfiguration));
-
-            var enricher = new HostEnricher();
-            return loggerConfiguration.With(enricher);
         }
     }
 }

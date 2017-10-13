@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using Serilog.Core;
 using Vostok.Airlock;
+using Vostok.Commons;
 using Vostok.Logging.Airlock;
 using SerilogEvent = Serilog.Events.LogEvent;
 using SerilogEventLevel = Serilog.Events.LogEventLevel;
@@ -32,6 +33,8 @@ namespace Vostok.Logging.Serilog.Sinks
                 Exception = logEvent.Exception?.ToString().Truncate(maxExceptionLength),
                 Properties = logEvent.Properties.ToDictionary(x => x.Key, x => x.Value.ToString())
             };
+            // todo (spaceorc, 13.10.2017) make "host" constant somewhere in Vostok.Core/LogPropertyNames.cs
+            logEventData.Properties["host"] = HostnameProvider.Get();
 
             airlockClient.Push(routingKey, logEventData);
         }

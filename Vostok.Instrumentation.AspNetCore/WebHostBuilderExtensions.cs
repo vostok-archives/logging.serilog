@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using Vostok.Airlock;
 using Vostok.Clusterclient.Topology;
-using Vostok.Commons.Extensions.UnitConvertions;
 using Vostok.Logging;
 using Vostok.Logging.Serilog;
 using Vostok.Metrics;
@@ -41,7 +40,6 @@ namespace Vostok.Instrumentation.AspNetCore
                     var routingKeyPrefix = RoutingKey.Create(project, environment, service, "logs");
 
                     Log.Logger = new LoggerConfiguration()
-                        .Enrich.WithHost()
                         .Enrich.WithProperty("Service", service)
                         .WriteTo.Airlock(airlockClient, routingKeyPrefix)
                         .WriteTo.Async(x => x.RollingFile(rollingFilePathFormat, outputTemplate: LogOutputTemplate))
