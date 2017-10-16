@@ -36,7 +36,7 @@ namespace Vostok.Logging.Serilog.Sinks
             // todo (spaceorc, 13.10.2017) make "host" constant somewhere in Vostok.Core/LogPropertyNames.cs
             logEventData.Properties["host"] = HostnameProvider.Get();
 
-            airlockClient.Push(routingKey, logEventData);
+            airlockClient.Push(routingKey, logEventData, logEventData.Timestamp);
         }
 
         private LogLevel TranslateLevel(SerilogEventLevel level)
