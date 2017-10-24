@@ -4,6 +4,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using Vostok.Airlock;
+using Vostok.Airlock.Metrics;
+using Vostok.Airlock.Tracing;
 using Vostok.Clusterclient.Topology;
 using Vostok.Logging;
 using Vostok.Logging.Serilog;
@@ -89,8 +91,7 @@ namespace Vostok.Instrumentation.AspNetCore
                     var routingKey = RoutingKey.Create(project, environment, service, "traces");
 
                     Trace.Configuration.IsEnabled = () => true;
-                    Trace.Configuration.AirlockClient = airlockClient;
-                    Trace.Configuration.AirlockRoutingKey = () => routingKey;
+                    Trace.Configuration.Reporter = new AirlockTraceReporter(airlockClient, routingKey);
                 });
         }
 

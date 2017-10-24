@@ -2,8 +2,8 @@ using System;
 using System.Linq;
 using Serilog.Core;
 using Vostok.Airlock;
+using Vostok.Airlock.Logging;
 using Vostok.Commons;
-using Vostok.Logging.Airlock;
 using SerilogEvent = Serilog.Events.LogEvent;
 using SerilogEventLevel = Serilog.Events.LogEventLevel;
 
