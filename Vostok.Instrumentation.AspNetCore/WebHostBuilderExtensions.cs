@@ -9,6 +9,7 @@ using Vostok.Airlock.Tracing;
 using Vostok.Clusterclient.Topology;
 using Vostok.Logging;
 using Vostok.Logging.Serilog;
+using Vostok.Logging.Serilog.Enrichers;
 using Vostok.Metrics;
 using Vostok.Tracing;
 
@@ -42,11 +43,11 @@ namespace Vostok.Instrumentation.AspNetCore
                     var routingKeyPrefix = RoutingKey.Create(project, environment, service, RoutingKey.LogsSuffix);
 
                     Log.Logger = new LoggerConfiguration()
-                        .Enrich.WithProperty("Service", service)
+                        .Enrich.With<FlowContextEnricher>()
                         .WriteTo.Airlock(airlockClient, routingKeyPrefix)
                         .WriteTo.Async(x => x.RollingFile(rollingFilePathFormat, outputTemplate: LogOutputTemplate))
                         .CreateLogger();
-                    var log = new SerilogLog(Log.Logger).WithFlowContext();
+                    var log = new SerilogLog(Log.Logger);
 
                     logging.AddVostok(log);
                     logging.Services.AddSingleton(log);
@@ -64,9 +65,10 @@ namespace Vostok.Instrumentation.AspNetCore
                 var logFilePathFormat = airlockConfigSection.GetValue<string>("logFilePathFormat");
 
                 var logger = new LoggerConfiguration()
+                    .Enrich.With<FlowContextEnricher>()
                     .WriteTo.Async(x => x.RollingFile(logFilePathFormat, outputTemplate: LogOutputTemplate))
                     .CreateLogger();
-                var log = new SerilogLog(logger).WithFlowContext();
+                var log = new SerilogLog(logger);
 
                 var airlockClient = new AirlockClient(new AirlockConfig
                 {

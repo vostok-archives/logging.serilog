@@ -7,7 +7,7 @@ namespace Vostok.Logging.Serilog.Enrichers
     {
         public void Enrich(global::Serilog.Events.LogEvent logEvent, ILogEventPropertyFactory propertyFactory)
         {
-            logEvent.AddPropertyIfAbsent(propertyFactory.CreateProperty("Thread", Thread.CurrentThread.Name ?? Thread.CurrentThread.ManagedThreadId.ToString(), false));
+            logEvent.AddPropertyIfAbsent(propertyFactory.CreateProperty("Thread", Thread.CurrentThread.Name ?? Thread.CurrentThread.ManagedThreadId.ToString()));
         }
     }
 }
