@@ -46,8 +46,7 @@ namespace Vostok.Instrumentation.AspNetCore
 
         private static string GetOperationName(string httpMethod, Uri url)
         {
-            var normalizedUrl = url.GetOperationName();
-            return httpMethod + " " + normalizedUrl;
+            return httpMethod + " " + url.GetNormalizedPath();
         }
 
         private static Uri GetUrl(HttpRequest request)
