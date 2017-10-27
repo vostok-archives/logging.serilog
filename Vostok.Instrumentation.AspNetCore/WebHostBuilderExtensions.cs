@@ -39,7 +39,7 @@ namespace Vostok.Instrumentation.AspNetCore
                     var service = hostingContext.Configuration.GetValue<string>("service");
                     var project = hostingContext.Configuration.GetValue<string>("project");
                     var environment = hostingContext.Configuration.GetValue<string>("environment");
-                    var routingKeyPrefix = RoutingKey.Create(project, environment, service, "logs");
+                    var routingKeyPrefix = RoutingKey.Create(project, environment, service, RoutingKey.LogsSuffix);
 
                     Log.Logger = new LoggerConfiguration()
                         .Enrich.WithProperty("Service", service)
@@ -88,7 +88,7 @@ namespace Vostok.Instrumentation.AspNetCore
                     var service = configuration.GetValue<string>("service");
                     var project = configuration.GetValue<string>("project");
                     var environment = configuration.GetValue<string>("environment");
-                    var routingKey = RoutingKey.Create(project, environment, service, "traces");
+                    var routingKey = RoutingKey.Create(project, environment, service, RoutingKey.TracesSuffix);
 
                     Trace.Configuration.IsEnabled = () => true;
                     Trace.Configuration.Reporter = new AirlockTraceReporter(airlockClient, routingKey);
