@@ -90,7 +90,6 @@ namespace Vostok.Instrumentation.AspNetCore
                     var environment = configuration.GetValue<string>("environment");
                     var routingKey = RoutingKey.Create(project, environment, service, RoutingKey.TracesSuffix);
 
-                    Trace.Configuration.IsEnabled = () => true;
                     Trace.Configuration.Reporter = new AirlockTraceReporter(airlockClient, routingKey);
                 });
         }
@@ -109,8 +108,7 @@ namespace Vostok.Instrumentation.AspNetCore
                     var airlockMetricReporter = new AirlockMetricReporter(airlockClient, routingKeyPrefix);
                     var metricConfiguration = new MetricConfiguration
                     {
-                        Reporter = airlockMetricReporter,
-                        Environment = environment
+                        Reporter = airlockMetricReporter
                     };
                     services.AddSingleton<IMetricConfiguration>(metricConfiguration);
                     services.AddSingleton<IMetricScope>(new RootMetricScope(metricConfiguration));
