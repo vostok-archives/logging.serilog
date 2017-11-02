@@ -4,14 +4,20 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;
 using Vostok.Commons;
 using Vostok.Commons.Extensions.Uri;
+using Vostok.Hosting;
 using Vostok.Tracing;
 
-namespace Vostok.Instrumentation.AspNetCore
+namespace Vostok.Instrumentation.AspNetCore.Middleware
 {
     public class RequestExecutionTraceMiddleware
     {
         private readonly RequestDelegate next;
         private readonly string serviceName;
+
+        public RequestExecutionTraceMiddleware(RequestDelegate next, IVostokHostingEnvironment vostokHostingEnvironment)
+            : this(next, vostokHostingEnvironment.Service)
+        {
+        }
 
         public RequestExecutionTraceMiddleware(RequestDelegate next, string serviceName)
         {
@@ -30,16 +36,12 @@ namespace Vostok.Instrumentation.AspNetCore
                 spanBuilder.SetAnnotation(TracingAnnotationNames.Host, HostnameProvider.Get());
                 spanBuilder.SetAnnotation(TracingAnnotationNames.HttpUrl, url.ToStringWithoutQuery());
                 if (context.Request.ContentLength.HasValue)
-                {
                     spanBuilder.SetAnnotation(TracingAnnotationNames.HttpRequestContentLength, context.Request.ContentLength);
-                }
 
                 await next.Invoke(context).ConfigureAwait(false);
 
                 if (context.Response.ContentLength.HasValue)
-                {
                     spanBuilder.SetAnnotation(TracingAnnotationNames.HttpResponseContentLength, context.Response.ContentLength);
-                }
                 spanBuilder.SetAnnotation(TracingAnnotationNames.HttpCode, context.Response.StatusCode);
             }
         }
