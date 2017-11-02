@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using Vostok.Commons.Extensions.UnitConvertions;
+using Vostok.Instrumentation.AspNetCore.Middleware;
 using Vostok.Metrics;
 
 namespace Vostok.Instrumentation.AspNetCore
