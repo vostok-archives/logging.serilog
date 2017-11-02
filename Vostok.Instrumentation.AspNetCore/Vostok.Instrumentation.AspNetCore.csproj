@@ -11,21 +11,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="2.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="2.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.0.0" />
-    <PackageReference Include="Serilog" Version="2.5.0" />
-    <PackageReference Include="Serilog.Sinks.Async" Version="1.1.0" />
-    <PackageReference Include="Serilog.Sinks.Console" Version="3.1.0" />
-    <PackageReference Include="Serilog.Sinks.RollingFile" Version="3.3.0" />
     <PackageReference Include="Vostok.Airlock.Client" Version="1.0.0-pre000326-hosting" />
     <PackageReference Include="Vostok.Core" Version="1.0.0-pre000326-hosting" />
     <PackageReference Include="Vostok.Hosting.Core" Version="1.0.0-pre000326-hosting" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Vostok.Logging.Serilog\Vostok.Logging.Serilog.csproj" />
   </ItemGroup>
 
 </Project>
