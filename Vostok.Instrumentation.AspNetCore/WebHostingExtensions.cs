@@ -15,6 +15,7 @@ namespace Vostok.Instrumentation.AspNetCore
             if (vostokHostingEnvironment == null)
                 throw new InvalidOperationException($"{nameof(VostokHostingEnvironment)} is not defined");
             webHostBuilder.UseSetting(WebHostDefaults.EnvironmentKey, TranslateEnvironmentName(vostokHostingEnvironment));
+            webHostBuilder.ConfigureAppConfiguration((context, builder) => builder.Add(new VostokConfigurationSource(vostokHostingEnvironment)));
             return webHostBuilder.ConfigureServices(
                 (webHostBuilderContext, services) =>
                 {
