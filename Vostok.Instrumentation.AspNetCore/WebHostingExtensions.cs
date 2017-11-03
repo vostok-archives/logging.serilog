@@ -25,6 +25,14 @@ namespace Vostok.Instrumentation.AspNetCore
                 });
         }
 
+        public static IApplicationBuilder UseVostok(this IApplicationBuilder app)
+        {
+            return app
+                .UseMiddleware<RequestExecutionDistributedContextMiddleware>()
+                .UseMiddleware<RequestExecutionTimeMiddleware>()
+                .UseMiddleware<RequestExecutionTraceMiddleware>();
+        }
+
         private static string TranslateEnvironmentName(IVostokHostingEnvironment vostokHostingEnvironment)
         {
             if (vostokHostingEnvironment.IsProduction())
@@ -34,14 +42,6 @@ namespace Vostok.Instrumentation.AspNetCore
             if (vostokHostingEnvironment.IsStaging())
                 return EnvironmentName.Staging;
             return vostokHostingEnvironment.Environment;
-        }
-
-        public static IApplicationBuilder UseVostok(this IApplicationBuilder app)
-        {
-            return app
-                .UseMiddleware<RequestExecutionDistributedContextMiddleware>()
-                .UseMiddleware<RequestExecutionTimeMiddleware>()
-                .UseMiddleware<RequestExecutionTraceMiddleware>();
         }
     }
 }
