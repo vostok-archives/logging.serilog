@@ -20,7 +20,7 @@ namespace Vostok.Instrumentation.AspNetCore
                 .UseMiddleware<RequestExecutionTimeMiddleware>()
                 .UseMiddleware<RequestExecutionTraceMiddleware>(service)
                 .UseVostokLogging()
-                .UseVostokSystemMetrics(10.Seconds());
+                .UseVostokSystemMetrics(1.Minutes());
         }
 
         public static IApplicationBuilder UseVostokLogging(this IApplicationBuilder app)
