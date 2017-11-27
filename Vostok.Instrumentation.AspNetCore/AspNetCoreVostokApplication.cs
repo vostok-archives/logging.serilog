@@ -9,12 +9,9 @@ namespace Vostok.Instrumentation.AspNetCore
     {
         private Task workTask;
 
-        protected IVostokHostingEnvironment HostingEnvironment { get; private set; }
-
         public async Task StartAsync(IVostokHostingEnvironment hostingEnvironment)
         {
-            HostingEnvironment = hostingEnvironment;
-            var webHost = BuildWebHost();
+            var webHost = BuildWebHost(hostingEnvironment);
             var applicationLifetime = webHost.Services.GetRequiredService<IApplicationLifetime>();
             var tcs = new TaskCompletionSource<int>();
             applicationLifetime.ApplicationStarted.Register(() => tcs.TrySetResult(0));
@@ -27,6 +24,6 @@ namespace Vostok.Instrumentation.AspNetCore
             await workTask.ConfigureAwait(false);
         }
 
-        protected abstract IWebHost BuildWebHost();
+        protected abstract IWebHost BuildWebHost(IVostokHostingEnvironment hostingEnvironment);
     }
 }
