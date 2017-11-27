@@ -16,12 +16,17 @@ namespace Vostok.Instrumentation.AspNetCore
             var tcs = new TaskCompletionSource<int>();
             applicationLifetime.ApplicationStarted.Register(() => tcs.TrySetResult(0));
             workTask = webHost.RunAsync(hostingEnvironment.ShutdownCancellationToken);
+            OnStarted(hostingEnvironment);
             await tcs.Task.ConfigureAwait(false);
         }
 
         public async Task WaitForTerminationAsync()
         {
             await workTask.ConfigureAwait(false);
+        }
+
+        protected virtual void OnStarted(IVostokHostingEnvironment hostingEnvironment)
+        {
         }
 
         protected abstract IWebHost BuildWebHost(IVostokHostingEnvironment hostingEnvironment);
