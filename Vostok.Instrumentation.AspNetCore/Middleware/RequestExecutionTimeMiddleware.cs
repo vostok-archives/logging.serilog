@@ -1,24 +1,24 @@
 ﻿using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
-using Vostok.Logging;
+using Microsoft.Extensions.Logging;
 
-namespace Vostok.Instrumentation.AspNetCore
+namespace Vostok.Instrumentation.AspNetCore.Middleware
 {
     public class RequestExecutionTimeMiddleware
     {
         private readonly RequestDelegate next;
-        private readonly ILog log;
+        private readonly ILogger<RequestExecutionTimeMiddleware> logger;
 
-        public RequestExecutionTimeMiddleware(RequestDelegate next, ILog log)
+        public RequestExecutionTimeMiddleware(RequestDelegate next, ILogger<RequestExecutionTimeMiddleware> logger)
         {
             this.next = next;
-            this.log = log;
+            this.logger = logger;
         }
 
         public async Task Invoke(HttpContext context)
         {
-            log.Info(
+            logger.LogInformation(
                 "Request {Method} {Scheme}://{Host}{PathBase}{Path}{QueryString} started",
                 context.Request.Method,
                 context.Request.Scheme,
@@ -28,14 +28,13 @@ namespace Vostok.Instrumentation.AspNetCore
                 context.Request.QueryString.Value);
 
             var stopwatch = Stopwatch.StartNew();
-
             try
             {
                 await next.Invoke(context).ConfigureAwait(false);
             }
             finally
             {
-                log.Info(
+                logger.LogInformation(
                     "Request {Method} {Scheme}://{Host}{PathBase}{Path}{QueryString} finished with {StatusCode} after {ElapsedMs} ms",
                     context.Request.Method,
                     context.Request.Scheme,

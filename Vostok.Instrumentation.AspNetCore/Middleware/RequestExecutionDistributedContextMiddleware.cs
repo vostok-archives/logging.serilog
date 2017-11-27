@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Vostok.Flow;
 
-namespace Vostok.Instrumentation.AspNetCore
+namespace Vostok.Instrumentation.AspNetCore.Middleware
 {
     public class RequestExecutionDistributedContextMiddleware
     {

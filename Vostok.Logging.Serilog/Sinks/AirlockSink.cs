@@ -4,6 +4,7 @@ using Serilog.Core;
 using Vostok.Airlock;
 using Vostok.Airlock.Logging;
 using Vostok.Commons;
+using Vostok.Hosting;
 using SerilogEvent = Serilog.Events.LogEvent;
 using SerilogEventLevel = Serilog.Events.LogEventLevel;
 
@@ -11,20 +12,34 @@ namespace Vostok.Logging.Serilog.Sinks
 {
     public class AirlockSink : ILogEventSink
     {
+        private readonly Func<IAirlockClient> getAirlockClient;
+        private readonly Func<string> getRoutingKey;
         private const int maxMessageLength = 32*1024;
         private const int maxExceptionLength = 32*1024;
 
-        private readonly IAirlockClient airlockClient;
-        private readonly string routingKey;
+        public AirlockSink()
+            : this(() => VostokHostingEnvironment.Current?.AirlockClient, () => VostokHostingEnvironment.Current?.GetLoggingRoutingKey())
+        {
+
+        }
+
+        public AirlockSink(Func<IAirlockClient> getAirlockClient, Func<string> getRoutingKey)
+        {
+            this.getAirlockClient = getAirlockClient;
+            this.getRoutingKey = getRoutingKey;
+        }
 
         public AirlockSink(IAirlockClient airlockClient, string routingKey)
+            : this(() => airlockClient, () => routingKey)
         {
-            this.airlockClient = airlockClient;
-            this.routingKey = routingKey;
         }
 
         public void Emit(SerilogEvent logEvent)
         {
+            var airlockClient = getAirlockClient();
+            var routingKey = getRoutingKey();
+            if (airlockClient == null || string.IsNullOrEmpty(routingKey))
+                return;
             var logEventData = new LogEventData
             {
                 Timestamp = logEvent.Timestamp,
