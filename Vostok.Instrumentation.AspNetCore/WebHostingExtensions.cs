@@ -29,8 +29,8 @@ namespace Vostok.Instrumentation.AspNetCore
         {
             return app
                 .UseMiddleware<RequestExecutionDistributedContextMiddleware>()
-                .UseMiddleware<RequestExecutionTimeMiddleware>()
-                .UseMiddleware<RequestExecutionTraceMiddleware>();
+                .UseMiddleware<RequestExecutionTraceMiddleware>()
+                .UseMiddleware<RequestExecutionTimeMiddleware>();
         }
 
         private static string TranslateEnvironmentName(IVostokHostingEnvironment vostokHostingEnvironment)
