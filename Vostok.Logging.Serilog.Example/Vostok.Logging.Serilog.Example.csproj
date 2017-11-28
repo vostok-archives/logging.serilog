@@ -1,15 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net461</TargetFramework>
+    <TargetFramework>net471</TargetFramework>
     <OutputType>Exe</OutputType>
     <AssemblyName>Vostok.Logging.Serilog.Example</AssemblyName>
     <Authors>Vostok team</Authors>
     <Company>SKB Kontur</Company>
     <Product>Vostok</Product>
     <RootNamespace>Vostok.Logging.Serilog.Example</RootNamespace>
-    <ApplicationIcon />
-    <StartupObject />
   </PropertyGroup>
 
   <ItemGroup>
