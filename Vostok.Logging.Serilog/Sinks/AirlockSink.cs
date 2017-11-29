@@ -20,7 +20,6 @@ namespace Vostok.Logging.Serilog.Sinks
         public AirlockSink()
             : this(() => VostokHostingEnvironment.Current?.AirlockClient, () => VostokHostingEnvironment.Current?.GetLoggingRoutingKey())
         {
-
         }
 
         public AirlockSink(Func<IAirlockClient> getAirlockClient, Func<string> getRoutingKey)

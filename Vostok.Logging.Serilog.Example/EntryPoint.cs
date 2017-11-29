@@ -2,6 +2,7 @@
 using System.Threading;
 using Serilog;
 using Vostok.Flow;
+using Vostok.Logging.Logs;
 using Vostok.Logging.Serilog.Enrichers;
 
 namespace Vostok.Logging.Serilog.Example
@@ -12,7 +13,8 @@ namespace Vostok.Logging.Serilog.Example
         {
             Log.Logger = new LoggerConfiguration()
                 .Enrich.With<FlowContextEnricher>()
-                .WriteTo.Console(outputTemplate: "{Timestamp:HH:mm:ss.fff} {Level} {Message:l} {Exception}{NewLine}{Properties}{NewLine}")
+                //.WriteTo.Console(outputTemplate: "{Timestamp:HH:mm:ss.fff} {Level} {Message:l} {Exception}{NewLine}{Properties}{NewLine}")
+                .WriteTo.VostokLog(new ConsoleLog())
                 .CreateLogger();
 
             var log = new SerilogLog(Log.Logger)
@@ -27,7 +29,7 @@ namespace Vostok.Logging.Serilog.Example
             
                 log.Info("Hello Bob!");
 
-                Thread.Sleep(1000);
+                Thread.Sleep(10000);
             }
         }
     }
