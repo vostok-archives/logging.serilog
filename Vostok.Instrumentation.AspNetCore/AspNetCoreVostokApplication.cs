@@ -17,7 +17,8 @@ namespace Vostok.Instrumentation.AspNetCore
             applicationLifetime.ApplicationStarted.Register(() => tcs.TrySetResult(0));
             workTask = webHost.RunAsync(hostingEnvironment.ShutdownCancellationToken);
             OnStarted(hostingEnvironment);
-            await tcs.Task.ConfigureAwait(false);
+            if (workTask == await Task.WhenAny(tcs.Task, workTask).ConfigureAwait(false))
+                await workTask.ConfigureAwait(false);
         }
 
         public async Task WaitForTerminationAsync()
