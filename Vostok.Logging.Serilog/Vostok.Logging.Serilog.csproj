@@ -12,9 +12,9 @@
 
   <ItemGroup>
     <PackageReference Include="Serilog" Version="2.5.0" />
-    <PackageReference Include="Vostok.Core" Version="1.0.0-pre000370" />
-    <PackageReference Include="Vostok.Airlock.Client" Version="1.0.0-pre000370" />
-    <PackageReference Include="Vostok.Hosting.Core" Version="1.0.0-pre000370" />
+    <PackageReference Include="Vostok.Core" Version="1.0.0-pre000374" />
+    <PackageReference Include="Vostok.Airlock.Client" Version="1.0.0-pre000374" />
+    <PackageReference Include="Vostok.Hosting.Core" Version="1.0.0-pre000374" />
   </ItemGroup>
 
 </Project>
