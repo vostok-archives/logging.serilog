@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;
@@ -38,11 +39,18 @@ namespace Vostok.Instrumentation.AspNetCore.Middleware
                 if (context.Request.ContentLength.HasValue)
                     spanBuilder.SetAnnotation(TracingAnnotationNames.HttpRequestContentLength, context.Request.ContentLength);
 
-                await next.Invoke(context).ConfigureAwait(false);
-
-                if (context.Response.ContentLength.HasValue)
-                    spanBuilder.SetAnnotation(TracingAnnotationNames.HttpResponseContentLength, context.Response.ContentLength);
-                spanBuilder.SetAnnotation(TracingAnnotationNames.HttpCode, context.Response.StatusCode);
+                try
+                {
+                    await next.Invoke(context).ConfigureAwait(false);
+                    if (context.Response.ContentLength.HasValue)
+                        spanBuilder.SetAnnotation(TracingAnnotationNames.HttpResponseContentLength, context.Response.ContentLength);
+                    spanBuilder.SetAnnotation(TracingAnnotationNames.HttpCode, context.Response.StatusCode);
+                }
+                catch
+                {
+                    spanBuilder.SetAnnotation(TracingAnnotationNames.HttpCode, HttpStatusCode.InternalServerError);
+                    throw;
+                }
             }
         }
 
