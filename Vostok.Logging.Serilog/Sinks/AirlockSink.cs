@@ -15,7 +15,6 @@ namespace Vostok.Logging.Serilog.Sinks
         private readonly Func<IAirlockClient> getAirlockClient;
         private readonly Func<string> getRoutingKey;
         private const int maxMessageLength = 32*1024;
-        private const int maxExceptionLength = 32*1024;
 
         public AirlockSink()
             : this(() => VostokHostingEnvironment.Current?.AirlockClient, () => VostokHostingEnvironment.Current?.GetLoggingRoutingKey())
@@ -39,12 +38,11 @@ namespace Vostok.Logging.Serilog.Sinks
             var routingKey = getRoutingKey();
             if (airlockClient == null || string.IsNullOrEmpty(routingKey))
                 return;
-            var logEventData = new LogEventData
+            var logEventData = new LogEventData(logEvent.Exception)
             {
                 Timestamp = logEvent.Timestamp,
                 Level = TranslateLevel(logEvent.Level),
                 Message = logEvent.MessageTemplate.Render(logEvent.Properties).Truncate(maxMessageLength),
-                Exception = logEvent.Exception?.ToString().Truncate(maxExceptionLength),
                 Properties = logEvent.Properties.ToDictionary(x => x.Key, x => x.Value.ToString())
             };
             // todo (spaceorc, 13.10.2017) make "host" constant somewhere in Vostok.Core/LogPropertyNames.cs
