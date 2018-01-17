@@ -38,11 +38,12 @@ namespace Vostok.Logging.Serilog.Sinks
             var routingKey = getRoutingKey();
             if (airlockClient == null || string.IsNullOrEmpty(routingKey))
                 return;
-            var logEventData = new LogEventData(logEvent.Exception)
+            var logEventData = new LogEventData
             {
                 Timestamp = logEvent.Timestamp,
                 Level = TranslateLevel(logEvent.Level),
                 Message = logEvent.MessageTemplate.Render(logEvent.Properties).Truncate(maxMessageLength),
+                Exceptions = logEvent.Exception.Parse(), // todo (andrew, 17.01.2018): maybe truncate if serialized Exceptions list has size > 32 kb
                 Properties = logEvent.Properties.ToDictionary(x => x.Key, x => x.Value.ToString())
             };
             // todo (spaceorc, 13.10.2017) make "host" constant somewhere in Vostok.Core/LogPropertyNames.cs
