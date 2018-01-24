@@ -17,6 +17,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Vostok.Logging.Serilog\Vostok.Logging.Serilog.csproj" />
+    <Reference Include="Vostok.Core">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\vostok.core\Vostok.Core\bin\Release\netstandard2.0\Vostok.Core.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
