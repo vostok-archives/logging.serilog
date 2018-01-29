@@ -8,6 +8,10 @@ full-build *default:
 
   install:
     - Vostok.Logging.Serilog/bin/Release/netstandard2.0/Vostok.Logging.Serilog.dll
+    - nuget Serilog/2.5.0
+    - module vostok.hosting.core
+    - module vostok.airlock.client
+    - module vostok.core
 
   deps:
     - vostok.hosting.core
