@@ -1,19 +1,19 @@
 full-build *default:
 
   build:
-    target: Vostok.Logging.Serilog.sln
+    target: Vstk.Logging.Serilog.sln
     configuration: Release
     tool:
       name: dotnet
 
   install:
-    - Vostok.Logging.Serilog/bin/Release/netstandard2.0/Vostok.Logging.Serilog.dll
+    - Vstk.Logging.Serilog/bin/Release/netstandard2.0/Vstk.Logging.Serilog.dll
     - nuget Serilog/2.5.0
-    - module vostok.hosting.core
-    - module vostok.airlock.client
-    - module vostok.core
+    - module vstk.hosting.core
+    - module vstk.airlock.client
+    - module vstk.core
 
   deps:
-    - vostok.hosting.core
-    - vostok.airlock.client
-    - vostok.core
+    - vstk.hosting.core
+    - vstk.airlock.client
+    - vstk.core

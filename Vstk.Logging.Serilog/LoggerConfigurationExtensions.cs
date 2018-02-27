@@ -2,10 +2,10 @@
 using Serilog;
 using Serilog.Configuration;
 using Serilog.Events;
-using Vostok.Airlock;
-using Vostok.Logging.Serilog.Sinks;
+using Vstk.Airlock;
+using Vstk.Logging.Serilog.Sinks;
 
-namespace Vostok.Logging.Serilog
+namespace Vstk.Logging.Serilog
 {
     public static class LoggerConfigurationExtensions
     {
@@ -33,7 +33,7 @@ namespace Vostok.Logging.Serilog
             return loggerConfiguration.Sink(sink, restrictedToMinimumLevel);
         }
 
-        public static LoggerConfiguration VostokLog(
+        public static LoggerConfiguration VstkLog(
             this LoggerSinkConfiguration loggerConfiguration,
             ILog log,
             LogEventLevel restrictedToMinimumLevel = LevelAlias.Minimum)
@@ -41,7 +41,7 @@ namespace Vostok.Logging.Serilog
             if (loggerConfiguration == null)
                 throw new ArgumentNullException(nameof(loggerConfiguration));
 
-            var sink = new VostokLogSink(log);
+            var sink = new VstkLogSink(log);
             return loggerConfiguration.Sink(sink, restrictedToMinimumLevel);
         }
     }

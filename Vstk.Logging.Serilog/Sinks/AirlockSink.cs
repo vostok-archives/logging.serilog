@@ -1,14 +1,14 @@
 using System;
 using System.Linq;
 using Serilog.Core;
-using Vostok.Airlock;
-using Vostok.Airlock.Logging;
-using Vostok.Commons;
-using Vostok.Hosting;
+using Vstk.Airlock;
+using Vstk.Airlock.Logging;
+using Vstk.Commons;
+using Vstk.Hosting;
 using SerilogEvent = Serilog.Events.LogEvent;
 using SerilogEventLevel = Serilog.Events.LogEventLevel;
 
-namespace Vostok.Logging.Serilog.Sinks
+namespace Vstk.Logging.Serilog.Sinks
 {
     public class AirlockSink : ILogEventSink
     {
@@ -46,7 +46,7 @@ namespace Vostok.Logging.Serilog.Sinks
                 Exceptions = logEvent.Exception.Parse(), // todo (andrew, 17.01.2018): maybe truncate if serialized Exceptions list has size > 32 kb
                 Properties = logEvent.Properties.ToDictionary(x => x.Key, x => x.Value.ToString())
             };
-            // todo (spaceorc, 13.10.2017) make "host" constant somewhere in Vostok.Core/LogPropertyNames.cs
+            // todo (spaceorc, 13.10.2017) make "host" constant somewhere in Vstk.Core/LogPropertyNames.cs
             logEventData.Properties["host"] = HostnameProvider.Get();
 
             airlockClient.Push(routingKey, logEventData, logEventData.Timestamp);

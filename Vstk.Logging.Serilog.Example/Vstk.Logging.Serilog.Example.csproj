@@ -3,11 +3,11 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <OutputType>Exe</OutputType>
-    <AssemblyName>Vostok.Logging.Serilog.Example</AssemblyName>
-    <Authors>Vostok team</Authors>
+    <AssemblyName>Vstk.Logging.Serilog.Example</AssemblyName>
+    <Authors>Vstk team</Authors>
     <Company>SKB Kontur</Company>
-    <Product>Vostok</Product>
-    <RootNamespace>Vostok.Logging.Serilog.Example</RootNamespace>
+    <Product>Vstk</Product>
+    <RootNamespace>Vstk.Logging.Serilog.Example</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,10 +16,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Vostok.Logging.Serilog\Vostok.Logging.Serilog.csproj" />
-    <Reference Include="Vostok.Core">
+    <ProjectReference Include="..\Vstk.Logging.Serilog\Vstk.Logging.Serilog.csproj" />
+    <Reference Include="Vstk.Core">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\vostok.core\Vostok.Core\bin\Release\netstandard2.0\Vostok.Core.dll</HintPath>
+      <HintPath>..\..\vstk.core\Vstk.Core\bin\Release\netstandard2.0\Vstk.Core.dll</HintPath>
     </Reference>
   </ItemGroup>
 

@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using Serilog.Core;
 
-namespace Vostok.Logging.Serilog.Enrichers
+namespace Vstk.Logging.Serilog.Enrichers
 {
     public class ThreadEnricher : ILogEventEnricher
     {

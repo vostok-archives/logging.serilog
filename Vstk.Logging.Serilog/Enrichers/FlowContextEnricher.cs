@@ -1,7 +1,7 @@
 ﻿using Serilog.Core;
-using Vostok.Flow;
+using Vstk.Flow;
 
-namespace Vostok.Logging.Serilog.Enrichers
+namespace Vstk.Logging.Serilog.Enrichers
 {
     public class FlowContextEnricher : ILogEventEnricher
     {

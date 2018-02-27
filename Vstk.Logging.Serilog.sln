@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vostok.Logging.Serilog", "Vostok.Logging.Serilog\Vostok.Logging.Serilog.csproj", "{9DAA8DF7-9AC1-4DD3-BD24-C92A8269AC58}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vstk.Logging.Serilog", "Vstk.Logging.Serilog\Vstk.Logging.Serilog.csproj", "{9DAA8DF7-9AC1-4DD3-BD24-C92A8269AC58}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vostok.Logging.Serilog.Example", "Vostok.Logging.Serilog.Example\Vostok.Logging.Serilog.Example.csproj", "{E6E2BAE6-7B4D-48F8-B04E-B0DADD7592B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vstk.Logging.Serilog.Example", "Vstk.Logging.Serilog.Example\Vstk.Logging.Serilog.Example.csproj", "{E6E2BAE6-7B4D-48F8-B04E-B0DADD7592B2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -2,30 +2,30 @@ using System;
 using Serilog.Core;
 using Serilog.Events;
 
-namespace Vostok.Logging.Serilog.Sinks
+namespace Vstk.Logging.Serilog.Sinks
 {
-    public class VostokLogSink : ILogEventSink
+    public class VstkLogSink : ILogEventSink
     {
         private readonly ILog log;
 
-        public VostokLogSink(ILog log)
+        public VstkLogSink(ILog log)
         {
             this.log = log;
         }
 
         public void Emit(global::Serilog.Events.LogEvent logEvent)
         {
-            var vostokLogLevel = TranslateLevel(logEvent.Level);
-            if (!log.IsEnabledFor(vostokLogLevel))
+            var vstkLogLevel = TranslateLevel(logEvent.Level);
+            if (!log.IsEnabledFor(vstkLogLevel))
                 return;
-            var vostokLogEvent = new LogEvent(
-                vostokLogLevel, 
+            var vstkLogEvent = new LogEvent(
+                vstkLogLevel, 
                 logEvent.Exception, 
                 logEvent.MessageTemplate.Render(logEvent.Properties),
                 new object[0]);
             foreach (var kvp in logEvent.Properties)
-                vostokLogEvent.AddPropertyIfAbsent(kvp.Key, kvp.Value);
-            log.Log(vostokLogEvent);
+                vstkLogEvent.AddPropertyIfAbsent(kvp.Key, kvp.Value);
+            log.Log(vstkLogEvent);
         }
 
         private LogLevel TranslateLevel(LogEventLevel logEventLevel)

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Threading;
 using Serilog;
-using Vostok.Flow;
-using Vostok.Logging.Logs;
-using Vostok.Logging.Serilog.Enrichers;
+using Vstk.Flow;
+using Vstk.Logging.Logs;
+using Vstk.Logging.Serilog.Enrichers;
 
-namespace Vostok.Logging.Serilog.Example
+namespace Vstk.Logging.Serilog.Example
 {
     public static class EntryPoint
     {
@@ -14,7 +14,7 @@ namespace Vostok.Logging.Serilog.Example
             Log.Logger = new LoggerConfiguration()
                 .Enrich.With<FlowContextEnricher>()
                 //.WriteTo.Console(outputTemplate: "{Timestamp:HH:mm:ss.fff} {Level} {Message:l} {Exception}{NewLine}{Properties}{NewLine}")
-                .WriteTo.VostokLog(new ConsoleLog())
+                .WriteTo.VstkLog(new ConsoleLog())
                 .CreateLogger();
 
             var log = new SerilogLog(Log.Logger)
