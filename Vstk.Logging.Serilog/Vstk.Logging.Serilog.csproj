@@ -3,10 +3,14 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <AssemblyName>Vstk.Logging.Serilog</AssemblyName>
-    <Authors>Vstk team</Authors>
+    <Authors>Vostok team</Authors>
     <Company>SKB Kontur</Company>
-    <Product>Vstk</Product>
+    <Product>Vostok</Product>
     <RootNamespace>Vstk.Logging.Serilog</RootNamespace>
+    <Copyright>Copyright © SKB Kontur 2017-2018</Copyright>
+    <PackageProjectUrl>https://github.com/vostok/vstk.logging.serilog</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/vostok/vstk.logging.serilog/blob/master/LICENSE</PackageLicenseUrl>
+    <Description>Serilog support for vostok-based applications</Description>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Serilog" Version="2.5.0" />
