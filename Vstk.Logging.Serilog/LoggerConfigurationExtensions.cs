@@ -33,7 +33,7 @@ namespace Vstk.Logging.Serilog
             return loggerConfiguration.Sink(sink, restrictedToMinimumLevel);
         }
 
-        public static LoggerConfiguration VstkLog(
+        public static LoggerConfiguration VostokLog(
             this LoggerSinkConfiguration loggerConfiguration,
             ILog log,
             LogEventLevel restrictedToMinimumLevel = LevelAlias.Minimum)
@@ -41,7 +41,7 @@ namespace Vstk.Logging.Serilog
             if (loggerConfiguration == null)
                 throw new ArgumentNullException(nameof(loggerConfiguration));
 
-            var sink = new VstkLogSink(log);
+            var sink = new VostokLogSink(log);
             return loggerConfiguration.Sink(sink, restrictedToMinimumLevel);
         }
     }

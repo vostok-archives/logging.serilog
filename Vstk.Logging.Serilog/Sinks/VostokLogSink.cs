@@ -4,28 +4,28 @@ using Serilog.Events;
 
 namespace Vstk.Logging.Serilog.Sinks
 {
-    public class VstkLogSink : ILogEventSink
+    public class VostokLogSink : ILogEventSink
     {
         private readonly ILog log;
 
-        public VstkLogSink(ILog log)
+        public VostokLogSink(ILog log)
         {
             this.log = log;
         }
 
         public void Emit(global::Serilog.Events.LogEvent logEvent)
         {
-            var vstkLogLevel = TranslateLevel(logEvent.Level);
-            if (!log.IsEnabledFor(vstkLogLevel))
+            var vostokLogLevel = TranslateLevel(logEvent.Level);
+            if (!log.IsEnabledFor(vostokLogLevel))
                 return;
-            var vstkLogEvent = new LogEvent(
-                vstkLogLevel, 
+            var vostokLogEvent = new LogEvent(
+                vostokLogLevel, 
                 logEvent.Exception, 
                 logEvent.MessageTemplate.Render(logEvent.Properties),
                 new object[0]);
             foreach (var kvp in logEvent.Properties)
-                vstkLogEvent.AddPropertyIfAbsent(kvp.Key, kvp.Value);
-            log.Log(vstkLogEvent);
+                vostokLogEvent.AddPropertyIfAbsent(kvp.Key, kvp.Value);
+            log.Log(vostokLogEvent);
         }
 
         private LogLevel TranslateLevel(LogEventLevel logEventLevel)
