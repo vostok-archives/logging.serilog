@@ -2,7 +2,7 @@ using System;
 using Serilog.Core;
 using Serilog.Events;
 
-namespace Vstk.Logging.Serilog.Sinks
+namespace Vostok.Logging.Serilog.Sinks
 {
     public class VostokLogSink : ILogEventSink
     {

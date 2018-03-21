@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Threading;
 using Serilog;
-using Vstk.Flow;
-using Vstk.Logging.Logs;
-using Vstk.Logging.Serilog.Enrichers;
+using Vostok.Flow;
+using Vostok.Logging.Logs;
+using Vostok.Logging.Serilog.Enrichers;
 
-namespace Vstk.Logging.Serilog.Example
+namespace Vostok.Logging.Serilog.Example
 {
     public static class EntryPoint
     {

@@ -2,31 +2,31 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
-    <AssemblyName>Vstk.Logging.Serilog</AssemblyName>
+    <AssemblyName>Vostok.Logging.Serilog</AssemblyName>
     <Authors>Vostok team</Authors>
     <Company>SKB Kontur</Company>
     <Product>Vostok</Product>
-    <RootNamespace>Vstk.Logging.Serilog</RootNamespace>
+    <RootNamespace>Vostok.Logging.Serilog</RootNamespace>
     <Copyright>Copyright © SKB Kontur 2017-2018</Copyright>
-    <PackageProjectUrl>https://github.com/vostok/vstk.logging.serilog</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/vostok/vstk.logging.serilog/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/vostok/vostok.logging.serilog</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/vostok/vostok.logging.serilog/blob/master/LICENSE</PackageLicenseUrl>
     <Description>Serilog support for vostok-based applications</Description>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Serilog" Version="2.5.0" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Vstk.Core">
+    <Reference Include="Vostok.Core">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\vstk.core\Vstk.Core\bin\Release\netstandard2.0\Vstk.Core.dll</HintPath>
+      <HintPath>..\..\vostok.core\Vostok.Core\bin\Release\netstandard2.0\Vostok.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Vstk.Airlock.Client">
+    <Reference Include="Vostok.Airlock.Client">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\vstk.airlock.client\Vstk.Airlock.Client\bin\Release\netstandard2.0\Vstk.Airlock.Client.dll</HintPath>
+      <HintPath>..\..\vostok.airlock.client\Vostok.Airlock.Client\bin\Release\netstandard2.0\Vostok.Airlock.Client.dll</HintPath>
     </Reference>
-    <Reference Include="Vstk.Hosting.Core">
+    <Reference Include="Vostok.Hosting.Core">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\vstk.hosting.core\Vstk.Hosting.Core\bin\Release\netstandard2.0\Vstk.Hosting.Core.dll</HintPath>
+      <HintPath>..\..\vostok.hosting.core\Vostok.Hosting.Core\bin\Release\netstandard2.0\Vostok.Hosting.Core.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>

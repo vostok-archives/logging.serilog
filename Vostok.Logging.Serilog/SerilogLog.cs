@@ -6,7 +6,7 @@ using Serilog.Events;
 using SerilogEvent = Serilog.Events.LogEvent;
 using SerilogLevel = Serilog.Events.LogEventLevel;
 
-namespace Vstk.Logging.Serilog
+namespace Vostok.Logging.Serilog
 {
     public sealed class SerilogLog : ILog
     {

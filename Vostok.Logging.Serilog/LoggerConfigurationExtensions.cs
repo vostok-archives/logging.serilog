@@ -2,10 +2,10 @@
 using Serilog;
 using Serilog.Configuration;
 using Serilog.Events;
-using Vstk.Airlock;
-using Vstk.Logging.Serilog.Sinks;
+using Vostok.Airlock;
+using Vostok.Logging.Serilog.Sinks;
 
-namespace Vstk.Logging.Serilog
+namespace Vostok.Logging.Serilog
 {
     public static class LoggerConfigurationExtensions
     {
