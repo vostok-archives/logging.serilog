@@ -4,7 +4,6 @@ using Serilog.Core;
 using Vostok.Airlock;
 using Vostok.Airlock.Logging;
 using Vostok.Commons;
-using Vostok.Hosting;
 using SerilogEvent = Serilog.Events.LogEvent;
 using SerilogEventLevel = Serilog.Events.LogEventLevel;
 
@@ -15,11 +14,6 @@ namespace Vostok.Logging.Serilog.Sinks
         private readonly Func<IAirlockClient> getAirlockClient;
         private readonly Func<string> getRoutingKey;
         private const int maxMessageLength = 32*1024;
-
-        public AirlockSink()
-            : this(() => VostokHostingEnvironment.Current?.AirlockClient, () => VostokHostingEnvironment.Current?.GetLoggingRoutingKey())
-        {
-        }
 
         public AirlockSink(Func<IAirlockClient> getAirlockClient, Func<string> getRoutingKey)
         {
